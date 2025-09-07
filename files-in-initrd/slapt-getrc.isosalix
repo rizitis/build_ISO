@@ -1,0 +1,12 @@
+# This is the configuration file used to fetch the packages to include in
+# the ISO for Salix64-15.0
+# Working directory for local storage/cache.
+WORKINGDIR=/var/slapt-get
+# The Slint repository
+SOURCE=file:///repo/x86_64/slint-15.0/:DEFAULT
+# The Salix repository:
+SOURCE=file:///data/repos/salix-15.0/:PREFERRED
+# The Slackware repository:
+SOURCE=file:///data/repos/slackware-15.0/:OFFICIAL
+# The Slackware extra repository
+SOURCE=file:///data/repos/slackware-15.0/extra/:DEFAULT

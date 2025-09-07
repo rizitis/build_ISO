@@ -1,0 +1,103 @@
+
+# Modified S51espeakup from Debian in
+# https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/debian-11.6.0-amd64-DVD-1.iso
+# /install.amd/gtk/inird.gz
+BASE=/sys/class/sound
+
+if [ ! -d /sys/class/sound ]; then
+	touch /tmp/noespeakup
+	exit
+fi
+
+strip () {
+	cardid=${1#$BASE/card}
+	echo ${cardid%/id}
+}
+
+# Give drivers some time to detect boards :/
+echo "Please wait while we probe your sound card(s)..."
+sleep 1
+S=1
+while true
+do
+	IDS=$(echo $BASE/card*/id)
+	if [ "$IDS" = "$BASE/card*/id" ]; then
+		if [ "$S" -ge 3 ]; then
+			echo "No sound card detected after $S seconds..."
+		fi
+		if [ "$S" -lt 80 ]; then
+			# We have seen cards taking as much as 12s to get initialized...
+			sleep 1
+			S=$((S+1))
+			continue
+		#else
+		#	echo "Can not do software speech synthesis... Press enter to continue anyway."
+		#	read
+		#	break
+		fi
+	fi
+
+	IDS=$(echo $BASE/card*/id)
+	N=$(echo $IDS | wc -w)
+
+	# Sleep again as much, in case more cards are to come :/
+	echo "Found $N audio card(s), waiting for $S more seconds for any other card..."
+	sleep $S
+
+	. /usr/share/alsa/utils.sh
+	preinit_levels all > /dev/null 2>&1
+	sanify_levels all > /dev/null 2>&1
+
+	IDS=$(echo $BASE/card*/id)
+	N=$(echo $IDS | wc -w)
+
+	echo "Found $N audio card(s)."
+
+	case $N in
+	1)
+		# Just one card, can not be wrong
+		[ ! -f /tmp/noespeakup ] && /usr/bin/espeakup -V $(cat /tmp/speech) > /tmp/espeakup.log 2>&1
+		[ ! -f /tmp/noespeakup ] && echo "/usr/bin/espeakup -V $(cat /tmp/speech)" >> /tmp/report
+		;;
+	*)
+		# Several cards, make the user choose
+		CARD=none
+		while [ "$CARD" = none ]
+		do
+			for ID in $IDS; do
+				i=$(strip $ID)
+				ALSA_CARD=$(cat /sys/class/sound/card$i/id)
+				[ ! -f /tmp/noespeakup ] && ALSA_CARD=$ALSA_CARD /usr/bin/espeakup -V $(cat /tmp/speech) >> /tmp/espeakup.log 2>&1
+				[ ! -f /tmp/noespeakup ] && echo "ALSA_CARD=$ALSA_CARD /usr/bin/espeakup -V $(cat /tmp/speech)" >> /tmp/report
+				echo $ALSA_CARD >/tmp/alsacard
+				echo "defaults.pcm.card $i" >/tmp/asound.conf
+				echo "defaults.ctl.card $i" >>/tmp/asound.conf
+				answer=none
+				echo "Please type enter to use the sound board $ALSA_CARD"
+				echo
+				read -t 7 dummy
+				answer=$?
+				if [ $answer -eq 0 ]; then
+					CARD=$i
+					echo "Card chosen: $i" >> /tmp/cards 
+					break
+				fi
+				[ ! -f /tmp/noespeakup ] && PID=$(ps -C espeakup --noheaders -o pid)
+				[ ! -f /tmp/noespeakup ] && kill -s 9 $PID
+				sleep 1
+			done
+			if [ "$CARD" = none ]; then
+				[ ! -f /tmp/noespeakup ] && echo "No card was selected. Speech will not be provided."
+				touch /tmp/noespeakup
+				rm /tmp/alsacard
+				rm /tmp/asound.conf
+				echo "No sound card selected" >> /tmp/report
+				exit
+			fi
+		done
+
+		echo "$CARD" > /var/run/espeakup.card
+		ALSA_CARD=$(cat /sys/class/sound/card$CARD/id) /usr/bin/espeakup --alsa-volume -V en >> /var/log/espeakup.log 2>&1
+	esac
+	break
+done

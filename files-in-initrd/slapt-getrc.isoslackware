@@ -1,0 +1,9 @@
+# This is the configuration file used to fetch the packages to include in
+# the ISO for Slackware64-15.0
+# Working directory for local storage/cache.
+WORKINGDIR=/var/slapt-get
+# The Slint repository
+SOURCE=file:///repo/x86_64/slint-15.0/:DEFAULT
+# The Slackware repository:
+SOURCE=file:///data/repos/slackware-15.0/:PREFERRED
+

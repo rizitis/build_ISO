@@ -1,0 +1,81 @@
+#!/bin/sh
+# shellcheck disable=SC1090
+. ./set_variables_slint
+rm -rf "$ROOTDIR"/firmware
+mkdir "$ROOTDIR"/firmware
+# We list all kernel modules needing a firmware
+(cd /lib/modules/"$KVER" || exit
+find . -name '*.ko.zst'|while read -r i; do
+	if modinfo "$i"|grep -q "^firmware"; then
+		echo $i >> "$ROOTDIR"/firmware/modules_with_firmware
+	fi
+done
+)
+# We keep only modules includuing a firmware we need during installation
+(cd "$ROOTDIR"/firmware || exit
+sed '
+\#/atm/#d
+\#/crypto/#d
+\#/gpu/#d
+\#/hid/#d
+\#/infiniband/#d
+\#/isdn/#d
+\#/media/#d
+\#/mfd/#d
+\#/can/softing/#d
+\#/netronome/#d
+\#/hamradio/#d
+\#/scsi/#d
+\#/tty/#d
+\#/usb/host/#d
+\#/usb/misc/#d
+\#/usb/serial/#d
+\#/video/#d
+\#/sound/#d
+\#/usb/storage/#d
+' modules_with_firmware > modules_with_needed_firmware
+)
+# We list the firmware files for the modules we kept
+(cd /lib/modules/"$KVER" || exit
+while read i; do
+	modinfo "$i"|grep "^firmware"|while read -r j; do
+		echo "$j"|sed 's#.* ##'
+	done >>  "$ROOTDIR"/firmware/firmware_files_unsorted
+done < "$ROOTDIR"/firmware/modules_with_needed_firmware
+)
+(cd "$ROOTDIR"/firmware/ || exit
+sort firmware_files_unsorted|uniq > firmware_files
+ while read -r i; do
+	p=$(find /lib/firmware -type f |grep "${i}")
+	if [ "$p" ]; then
+	echo "$p" >>  "$ROOTDIR"/firmware/regular_files
+	fi
+ done < "$ROOTDIR"/firmware/firmware_files
+ while read -r i; do
+	p=$(find /lib/firmware -type l |grep "${i}")
+	if [ "$p" ]; then
+	echo "$p" >>  "$ROOTDIR"/firmware/symbolic_links
+
+	fi
+ done < "$ROOTDIR"/firmware/firmware_files
+sort regular_files|uniq > regular_uniqs
+sort symbolic_links|uniq > symbolic_uniqs
+while read p; do
+	mkdir -p "$ROOTDIR"/firmware/pkg/$(dirname "$p")
+	cp -a "$p" "$ROOTDIR"/firmware/pkg/$(dirname "$p")
+done < regular_uniqs
+while read p; do
+	mkdir -p "$ROOTDIR"/firmware/pkg/$(dirname "$p")
+	cp -a "$p" "$ROOTDIR"/firmware/pkg/$(dirname "$p")
+done < symbolic_uniqs
+)
+(cd "$ROOTDIR"/firmware/pkg || exit
+mkdir install
+PKGNAM=firmware-installer
+ARCH=noarch
+VERSION=15.0
+BUILD=3slint
+echo $PKGNAM > "$ROOTDIR"/firmware/PKGNAM
+echo "firmware-installer: firmware-installer (firmware to allow a net install)" > install/slack-desc
+/sbin/makepkg -l y -c n "$ROOTDIR"/packages/$PKGNAM-$VERSION-$ARCH-$BUILD.txz
+)

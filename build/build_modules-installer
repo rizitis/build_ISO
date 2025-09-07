@@ -1,0 +1,15 @@
+#!/bin/sh
+# shellcheck disable=SC1090
+. ./set_variables_slint
+export PKGNAME=modules-installer
+export VERSION="$KVER"
+export ARCH=x86_64
+export BUILD=1slint
+rm -rf /tmp/pkg
+mkdir -p /tmp/pkg/lib/modules/"$KVER"
+cp -a /lib/modules/"$KVER"/* /tmp/pkg/lib/modules/"$KVER"
+(cd /tmp/pkg || exit
+mkdir install
+echo "modules-installer: modules-installer (kernel modules for the installer)" > install/slack-desc
+/sbin/makepkg -l y -c n "$ROOTDIR"/packages/"$PKGNAME"-"$VERSION"-"$ARCH"-"$BUILD".txz
+)

@@ -1,0 +1,20 @@
+PACKAGE NAME:  w3m-installer-0.5.3_37-x86_64-1slint.txz
+PACKAGE LOCATION:  ./source/build_ISO/packages
+PACKAGE SIZE (compressed):  665 K
+PACKAGE SIZE (uncompressed):  2660 K
+PACKAGE REQUIRED:  
+PACKAGE CONFLICTS:  
+PACKAGE SUGGESTS:  
+PACKAGE DESCRIPTION:
+w3m-installer: w3m (text based web browser and pager)
+w3m-installer:
+w3m-installer: w3m is a World Wide Web (WWW) text based client. It has English,
+w3m-installer: German and  Japanese help files and an option menu that can be
+w3m-installer: configured to use  the preferred language. It will display hypertext
+w3m-installer: markup language (HTML) documents containing links to files
+w3m-installer: residing on the local system, as well as files residing on remote
+w3m-installer: systems. It can display HTML tables, frames, and images, and
+w3m-installer: supports tabbed browsing.
+w3m-installer:
+w3m-installer: Homepage: http://w3m.sourceforge.net
+

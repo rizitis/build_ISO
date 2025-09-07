@@ -1,0 +1,107 @@
+This document describes the process of building an ISO to install Salix, Slackware or Slint, 
+version 15.0 for architecture x86_64, using a Slint installer. In what follows the variable
+$distribution can be salix, slackware or slint.
+
+All paths are relative to the directory hosting this file, also named $ROOTDIR.
+
+The ISO will include an initramfs customized adding and removing files to/from a genuine
+Slackware64-15.0 one.
+
+Before building, check that all variables set in $ROOTDIR/set_variables_* be up to date, including:
+KVER and ISOVERSION.
+
+Prerequisites: all packages to be included in the ISO and/or needed to customize the iniramfs should
+be up to date.
+This includes:
+* (A local copy of) repositories from which packages are copied in the ISO or added to the initramfs.
+* Packages in ./packages, to be added to the initramfs. Some are built by scripts in ./build:
+  - build_firmware-installer => package firmware-installer, to provide the firmware needed during
+    installation,
+  - build_modules-installer => package modules_installer, including the kernel modules to be loaded
+    during installation, associated to the kernel included in the initramfs,
+  - build_installer-translations, to provide the translations of messages displayed by configuration
+    scripts included in the Slint installer and replace by Salix or Slackware the word Slint in
+    these translations according to $distribution,
+  - extract_doc_installer_from_HandBook does what it says, for each of the provided locales.
+
+Once the prerequisites have been met, building the ISO is done running these scripts in ./build,
+some of which take as argument $distribution.
+TIP: you can can set and export distribution and run all scripts with $distribution as argument. 
+
+1. populate_iso_dir fetches and stores the packages to be included in the ISO in the directory
+   $ISODIR directory that it creates.
+2. add_metadata_to_the_iso adds to $ISODIR the metadata assoiated to the packages and a few files.
+3. add_boot_equipment_to_the_iso adds to $ISODIR a directory /boot/grub and writes in it the file
+   grub.cfg.
+4. unpack_slackware_initrd unpack the file initrd.img got from 
+   https://slackware.uk/slackware/slackware64-15.0/EFI/BOOT/initrd.img in ./initrd-tree.
+5. customize_the_initrd adds to the initramfs packages needed to make the installer accessible with
+   braille and speech and polyglot, includes files used to manage installation and customizes it for
+   $distribution.
+6. create_installer_initrd writes the file $ISODOR/initrd.
+7. write_the_iso writes the ISO image.
+
+These steps should be performed running the scripts in the following order:
+
+prerequistes-------|->populate_iso_dir-|->add_metadata_to_the_iso----------|
+get_latest_scripts-|                   |->add_booting_equipment_to_the_iso_|->write_the_iso
+									   |->create_installer_initrd----------| 
+
+TIP: if you wrote an ISO and find an issue with the initrd, once fixed you can rebuild and update it
+in $ISODIR running add_booting_equipment_to_the_iso then write_the_iso again, without running again
+the other scripts. 
+                                                                                  
+Customizing the ISO and the installer for $distribution is done mainly by two scripts sourcing the
+file ./build/set_variables_$distribution that sets variables among which $SETS, list of sets of
+packages to install in $distribution stored in ./sets.
+
+- populate_iso_dir stores in $ISODIR/slint the packages sets listed in $SETS for $distribution,
+  using slapt-get with the slapt-getrc file "$ROOTDIR/files-in-initrd/slapt-getrc.$distribution".
+  It puts in $ISODIR/slint (for Slint) ot in $ISODIR/installer (for other distributions) packages
+  that will be added to the initramfs by rc.S after having started it. For Slint it also adds
+  packages only installed if the locale in their name fits the one selected by the user.
+- customize_the_initrd adds to the installer:
+  . the packages and files used to make it polyglot, accessible with speech and braille, including
+    a package installer-translations-${distribution} built from po files adapted to $distribution,
+  . the packages sets (list of packages to install) for all distributions and addonsinstaller, list
+    of packages packages that the /etc/rc.d/rcS will add to the installer itself, stored in ./sets, 
+  . the installation scripts /etc/rc.d/rc.S, /sbin/functions and /sbin/start, the latter adapted to
+    the target $distribution, copying ./files-in-initrd/start"$distribution" as /sbin/start, and the
+    files /slapt-getrc.installation$distribution.
+
+Installation is customized for $distribution:
+- through specific settings in /sbin/start:
+  . $distribution set in /tmp/distro,
+  . the list of sets of packages to install set in /tmp/set/,
+  . a sed command replacing in /sbin/functions and /etc/rc.d/rc.d Slint by Salix or Slackware as
+    needed to display the installer's messages accordingly.
+  . a specific postconfigure$(cat /tmp/distro) function called by /sbin/start
+- using the "-c /slapt-getrc.installation$distribution" as configuration file for slapt-getrc.
+  
+The sets of packages used to install a distribution are:
+- For Salix: "bootstrapsalix aaa_base aaa core efi basic efi-gui fullsalix settings slintsalix"
+- For Slackware: "bootstrapslackware aaa_base slackware slintslackware"
+- For Slint: "bootstrapslint aaa_base full wpa_supplicant-nogui i3 lxqt mate"
+
+Packages' installation process:
+1. The script /etc/rc.d/rc.S (adapted from Slackware's installer) is started by init. After having
+   enabled swap in zram to increase the usable RAM, it adds to the initramfs packages needed during
+   installation, cf. lines 82-140 of ./files-in-initrd/rc.S. These packages, the same for all
+   distributions, are listed in ./sets/addonsinstaller
+2. The script /sbin/start (customized for each distribution), started by the user typing start,
+   does some distribution specific settings, then calls functions of /sbin/functions.
+3. The packages are installed in the target system by functions of /sbin/functions in the following
+   order, after having mounted its root filesystem as /SLINT regardless of the distribution:
+   - the package aaa_base, fetched from $ISO/slint
+   - the packages listed in /sets/bootstrap$distribution, fetched from $ISO/slint
+   - the remaining sets of packages to install, fetched from a remote repository if possible (to
+     provide their current versions), else from $ISO/slint. These sets are:
+     . For Slint, the set fullslint and the sets i3 and/or lxqt and/or mate as chosen by the user
+      (function selectcontent)
+     . For other distributions, all sets listed in /tmp/set and not yet installed
+     
+Some Slint packages are also installed in other distributions to bring them additional features,
+or to provide more recent packages than those provided in the other distributions. They are listed
+in the set slint$distribution.
+  
+

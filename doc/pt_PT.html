@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<title>Resumo do processo de instalação</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<div id="toc" class="toc2">
+<div id="toctitle"></div>
+<ul class="sectlevel1">
+<li><a href="#Overview_of_Slint_Installation">Resumo do processo de instalação</a></li>
+<li><a href="#Usage_of_the_installer">Utilização do instalador</a></li>
+<li><a href="#prepare_partitions_for_Slint">Opcionalmente, prepare as partições para o Slint</a></li>
+<li><a href="#Encryption">Slint com uma partição root encriptada.</a></li>
+<li><a href="#Speakup">Combinação de teclas para o leitor de ecrã Speakup</a></li>
+<li><a href="#first_steps_after_installation">Primeiros passos após a instalação</a></li>
+<li><a href="#_glossário">Glossário</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="Overview_of_Slint_Installation">Resumo do processo de instalação</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>O instalador analisa primeiro as unidades e partições existentes para avaliar as possibilidades e opções de instalação e deixa-lhe escolher entre uma preparação automática ou manual das partições utilizadas pelo Slint.</p>
+</div>
+<div class="paragraph">
+<p>Se escolher 'manual' são-lhe apresentadas as partições Linux onde o Slint poderia ser instalado (tamanho mínimo 50G), selecione uma delas e escolha o tipo de sistema de ficheiros que o instalador irá criar no mesmo: btrfs, ext4 ou xfs como mencionado em <a href="#prepare_partitions_for_Slint">Opcionalmente prepare partições para o Slint</a></p>
+</div>
+<div class="paragraph">
+<p>Se escolher 'auto' são-lhe apresentadas as unidades onde o Slint poderia ser instalado (com o tamanho de pelo menos 50G), e o sistema de ficheiros será do tipo btrfs.</p>
+</div>
+<div class="paragraph">
+<p>No caso do btrfs serão criados sub-volumes para "/" e "/home" com ficheiros comprimidos, e /swap para alojar um ficheiro swap. 'Copy on write' facilitará a criação de "snapshots" e possivelmente reverterá uma atualização de sistema defeituosa. Ferramentas para gerir os "snapshots" estão incluídas no Slint.</p>
+</div>
+<div class="paragraph">
+<p>Em ambos os modos, o utilizador escolhe quais as partições Linux e Windows existentes que serão automaticamente montadas após o arranque do Slint, e os seus nomes dos pontos de montagem, facilitando o acesso aos sistemas de saída e aos dados do Slint.</p>
+</div>
+<div class="paragraph">
+<p>Depois é proposto ao utilizador encriptar a partição root do sistema, para evitar o roubo de dados em caso de perda ou roubo da máquina, ou da unidade onde Slint está instalado. Se aceite, o instalador regista a palavra-passe que permite desbloquear esta partição. O utilizador irá ao introduzi-la no momento do arranque quando solicitado pelo GRUB para exibir o menu de arranque.</p>
+</div>
+<div class="paragraph">
+<p>Depois de tudo, o instalador resume as suas escolhas e deixa-lhe confirmá-las ou não. Até este ponto, nenhuma modificação terá sido feita aos sistemas e dados instalados que possa negar em segurança, depois escreva start novamente ou apenas reinicie sem qualquer dano.</p>
+</div>
+<div class="paragraph">
+<p>Depois o particionamento auto é feito caso ocorra, a partição root do Slint é encriptada se solicitada, a partição root é formatada e os primeiros pacotes de software são instalados.</p>
+</div>
+<div class="paragraph">
+<p>Se optou por um disco encriptado, escreva a palavra-passe que será usada para desbloquear a unidade em cada arranque.</p>
+</div>
+<div class="paragraph">
+<p>Escolhe uma palavra-passe para o utilizador "root". Este é o administrador do sistema, que tem todos os privilégios.</p>
+</div>
+<div class="paragraph">
+<p>Também se define o nome de acesso e palavra-passe de um utilizador padrão.</p>
+</div>
+<div class="paragraph">
+<p>Indica se necessitará de uma saída em Braile acessível, e se deseja entrar no modo texto ou gráfico. Se utilizou o idioma Inglês (EUA) durante a instalação, escolha o idioma a utilizar no sistema instalado, caso contrário o instalador define o mesmo que durante a instalação.</p>
+</div>
+<div class="paragraph">
+<p>O instalador tenta estabelecer uma ligação à Internet, e se tiver sucesso, propõe um fuso horário correspondente à sua localização geográfica que confirma, caso contrário selecione uma numa lista.</p>
+</div>
+<div class="paragraph">
+<p>É-lhe perguntado se vai precisar de Braille, depois se prefere começar numa consola ou num gráfico, a menos que tenha usado a voz durante a instalação ou precise de Braille: de seguida será deixado numa consola após reiniciar, por segurança.</p>
+</div>
+<div class="paragraph">
+<p>O instalador cria então um ficheiro swap. Isto pode demorar muito tempo. Seja paciente.</p>
+</div>
+<div class="paragraph">
+<p>Os pacotes são instalados na unidade. Se tiver sido estabelecida uma ligação à Internet, descarrega e instala a versão mais recente de cada pacote, incluindo os fornecidos desde o lançamento da imagem ISO.</p>
+</div>
+<div class="paragraph">
+<p>A instalação de todos os pacotes leva cerca de 10 a 40 minutos, dependendo do equipamento.</p>
+</div>
+<div class="paragraph">
+<p>Ser-lhe-á pedido que selecione um ambiente de trabalho (mesmo que comece numa consola no início) entre fvm, lxqt, mate e wmaker. Outras escolhas estarão disponíveis após a instalação, escrevendo 'xwmconfig', se iniciar numa consola</p>
+</div>
+<div class="paragraph">
+<p>Em seguida, o sistema é configurado e o gestor de arranque GRUB instalado. O Slint pode arrancar nos modos Legacy e EFI. O menu de arranque incluirá uma entrada de arranque "rescue" para detetar e permitir que qualquer SO instalado seja iniciado.</p>
+</div>
+<div class="paragraph">
+<p>Pode obter uma pré-visualização do menu de arranque antes de reiniciar.</p>
+</div>
+<div class="paragraph">
+<p>Depois, remova o meio de instalação e reinicie para iniciar o seu novo sistema Slint.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Usage_of_the_installer">Utilização do instalador</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Se está à vontade na linha de comandos, pode ignorar este tópico.</p>
+</div>
+<div class="paragraph">
+<p>O menu principal da instalação é apresentado abaixo:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Bem-vindo ao instalador Slint! (versão 15)
+
+Pode agora introduzir (sem os apóstrofos):
+
+'doc' para conhecer as funcionalidades e utilização do instalador.
+'start' para iniciar a instalação.
+
+O instalador pode preparar a unidade onde o Slint será instalado criando,
+as partições necessárias. Se preferir, pode fazê-lo sozinho/a usando
+utilitários de linha de comandos disponíveis no instalador, e depois
+escreva 'start' quando concluído. Também pode deixar o instalador e usar uma
+ferramenta como o gparted para o fazer, depois inicie o instalador novamente.
+
+Recomendamos que escreva 'doc' primeiro neste caso, ou se quiser
+encriptar a partição root do Slint.
+Quando terminar de ler, este menu será novamente exibido.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Assim que este menu for apresentado, fica responsável do processo de instalação.</p>
+</div>
+<div class="paragraph">
+<p>Leia o ecrã e escreva comandos num <a href="#virtual_terminal">terminal virtual</a>. O instalador inclui 4 terminais virtuais que partilham o mesmo teclado físico e ecrã, que podem ser usados em paralelo.</p>
+</div>
+<div class="paragraph">
+<p>O instalador começa no terminal virtual 1 chamado <strong>tty1</strong> mas pode trocar para outro. Por exemplo, pode mudar para <strong>tty2</strong> ao premir <strong>Alt-F2,</strong> depois prima Enter para ativá-lo e depois voltar para <strong>tty1</strong> ao premir <strong>Alt-F1,</strong> sem apagar informações apresentadas em ambos os terminais. <strong>Alt-F1</strong> significa: pressione e mantenha a tecla <strong>Alt</strong> e depois prima a tecla <strong>F1</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Isto pode ser útil para continuar a ler a documentação durante a instalação: por exemplo, pode mudar para <strong>tty2</strong> para iniciar a instalação, mudar para <strong>tty1</strong> para continuar a ler a documentação, depois mudar para <strong>tty1</strong> novamente para prosseguir para a próxima etapa de instalação.</p>
+</div>
+<div class="paragraph">
+<p>Isso também pode ser usado para consultar o glossário ao ler outros documentos.</p>
+</div>
+<div class="paragraph">
+<p>O instalador tem vários modos de interação consigo, o utilizador:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ecreva comandos no "prompt" e leia o resultado.</p>
+</li>
+<li>
+<p>O instalador faz uma pergunta, escreva a resposta e a confirme premindo Enter.</p>
+</li>
+<li>
+<p>O instalador mostra um menu de escolhas ou opções: selecione uma delas usando as setas para cima ou para baixo, depois confirme sua escolha premindo Enter, ou cancele premindo Esc.</p>
+</li>
+<li>
+<p>O instalador apresenta informações num paginador. Depois, utilize teclas de setas para ler a linha seguinte ou anterior, prima espaço para visualizar a página seguinte, Q para parar de ler o documento.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="prepare_partitions_for_Slint">Opcionalmente, prepare as partições para o Slint</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Neste documento 'formatar' uma partição significa: criar nela um sistema de ficheiros para gerir os ficheiros que irá conter.</p>
+</div>
+<div class="paragraph">
+<p>Se depois de ter introduzido 'start' escreva 'm' para particionamento manual, primeiro selecionará a partição root do sistema, que será montada como "/", depois o tipo do seu sistema de ficheiros entre: btrfs, ext4, xfs.</p>
+</div>
+<div class="paragraph">
+<p>O instalador lista para seleção apenas partições de tamanho mínimo de 50G e de Linux (também pode ser nomeado sistema de ficheiros Linux), não encriptados. Esta partição pode ser formatada ou não, mas em qualquer caso o seu conteúdo será eliminado e um novo sistema de ficheiros gerado pelo instalador.</p>
+</div>
+<div class="paragraph">
+<p>Além disso, o modo de particionamento Manual requer na mesma unidade que a partição root do sistema:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Uma partição do tipo partição de arranque BIOS, com um tamanho mínimo de 3M e não formatada, se a máquina arrancar em modo Legacy e a unidade tiver uma tabela de partições do tipo GPT.</p>
+</li>
+<li>
+<p>Uma partição do tipo sistema EFI, com pelo menos 32M de espaço livre, formatada com um sistema de ficheiros 'fat' (ou 'vfat'), conforme exigido pela especificação UEFI, se a máquina arrancar no modo EFI</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>É melhor configurar ambas as partições para permitir a troca entre os modos Legacy e EFI se a unidade tiver uma tabela de partições do tipo GPT.</p>
+</div>
+<div class="paragraph">
+<p>A utilização ou criação de partições existentes para o Slint fica ao critério do utilizador. Os sistemas já instalados que utilizam o arranque da BIOS e as partições EFI não serão afectados, apenas a partição root será (re)formatada, e uma partição /home existente apenas se for solicitada.</p>
+</div>
+<div class="paragraph">
+<p>O instalador inclui várias aplicações de partição: cfdisk, fdisk, sfdisk, cgdisk, gdisk, sgdisk, parted. As aplicações com "g" no seu nome só podem lidar com gpt, parted pode lidar com tabelas de partição DOS assim como GPT. fdisk, cfdisk e sfdisk podem lidar com tabelas de partição DOS. Além disso, estão disponíveis wipefs (para apagar as assinaturas anteriores da tabela de partições e do sistema de ficheiros) e partprobe (para informar o kernel das alterações de uma tabela de partições). As aplicações blkid e lsblk exibem informação sobre dispositivos e partições de blocos.</p>
+</div>
+<div class="paragraph">
+<p>Claro que também pode criar as partições a partir de outro sistema antes de iniciar o instalador.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Encryption">Slint com uma partição root encriptada.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>No modo Auto, o instalador propõe encriptar a partição root do sistema. Se estiver de acordo, em cada arranque o carregador de arranque GRUB irá perguntar-lhe a palavra-passe que terá introduzido durante a instalação para desbloquear a unidade, antes de mostrar o menu de arranque. Tenha em atenção que o desbloqueio da unidade demorará alguns segundos (cerca de dez segundos).</p>
+</div>
+<div class="paragraph">
+<p>Ter um sistema root encriptado impede o roubo de dados que contém em caso de perda ou roubo da máquina, ou de uma unidade removível. Mas isto não o protegerá se o computador continuar a funcionar e sem vigilância, apenas se a máquina tiver sido completamente desligada!</p>
+</div>
+<div class="paragraph">
+<p>Durante a instalação, a partição do sistema Slint será encriptada e também a partição adicional que poderá solicitar.</p>
+</div>
+<div class="paragraph">
+<p>Uma partição Slint (ou root) será nomeada: /dev/mapper/cryproot uma vez aberta, se ela tiver sido encriptada.</p>
+</div>
+<div class="paragraph">
+<p>Isso é mostrado por este comando:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>lsblk -lpo name,fstype,mountpoint | grep /$</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Que dá um resultado como:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>/dev/mapper/cryptroot ext4    /</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Em vez disso, este comando:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>lsblk -lpo name,fstype,mountpoint | grep /dev/sda3</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>dá:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>/dev/sda3             cryptoLUKS</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>/dev/sda3 é agora uma partição "raw" que inclui o chamado "LUKS header" que nunca precisará nem nunca deverá aceder diretamente. Aloja tudo que é necessário para encriptar ou desencriptar a partição /dev/mapper/cryptroot, que na verdade aloja os seus dados (neste exemplo, o sistema Slint).</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Se se esquecer da palavra-passe, todos os dados na unidade serão irreversivelmente perdidos! Por isso, anote ou grave esta palavra-passe e coloque o registo num lugar seguro, assim que terminar.</p>
+</div>
+<div class="paragraph">
+<p>As unidades falham. Se isso acontecer e forem encriptados, os seus dados serão perdidos. Por isso, fazer cópias de segurança dos seus dados regularmente não é opcional.</p>
+</div>
+<div class="paragraph">
+<p>Além disso, faça uma cópia de segurança do luks header da qual poderá restaurar no caso da partição luks se danificar por qualquer motivo. O comando pode ser como no nosso exemplo:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>luksHeaderBackup /dev/sda3 --header-backup-file &lt;file&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>onde &lt;file&gt; é o nome do ficheiro da cópia de segurança, que guardará num local seguro.</p>
+</div>
+<div class="paragraph">
+<p>Depois, precisaria de restaurar a cópia de segurança, escreva:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>luksHeaderRestore /dev/sda3 --header-backup-file &lt;file&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Não redimensione uma partição de uma unidade encriptada porque depois disso seria definitivamente bloqueada e todos os dados que contém serão perdidos! Se realmente precisa de mais espaço, precisará de fazer uma cópia de segurança de todos os ficheiros que deseja manter, por isso instale novamente e restaure os ficheiros da cópia de segurança.</p>
+</div>
+<div class="paragraph">
+<p>Escolha uma palavra-passe forte, para que um ladrão demore demasiado tempo a descobrir para que valha a pena.</p>
+</div>
+<div class="paragraph">
+<p>Nunca mexa com o chamado "LUKS header" localizado na partição raw (a terceira, como por ex. /dev/sda3 para a partição raw em cima da partição do sistema Slint). Na prática: não crie um sistema de ficheiros nesta partição, não o faça parte de uma matriz RAID e por norma, não grave: todos os dados seriam irreversivelmente perdidos!</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Para evitar palavras-passe fracas o instalador requer que a palavra-passe inclua:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Pelo menos 8 caracteres.</p>
+</li>
+<li>
+<p>Apenas letras minúsculas e maiúsculas não acentuadas, dígitos de 0 a 9, espaço e os seguintes caracteres de pontuação:</p>
+<div class="listingblock">
+<div class="content">
+<pre> ' ! " # $ % &amp; ( ) * + , - . / : ; &lt; = &gt; ? @ [ \ ] ^ _ ` { | } ~</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Isso garante que até mesmo um novo teclado tenha todos os caracteres necessários para introduzir a palavra-passe.</p>
+</div>
+</li>
+<li>
+<p>Pelo menos um dígito, uma letra minúscula, uma letra maiúscula e um carácter de pontuação.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>O GRUB assume que o teclado "us" está em uso quando introduz a palavra-passe. Por esta razão, se durante a instalação usar um outro mapa de teclado, antes de perguntar a palavra-passe o instalador irá definir o mapa do teclado como "us" e depois de ter gravado ele restaura o usado anteriormente. Neste caso o instalador também introduzirá cada carácter digitado da palavra-passe, como pode ser diferente daquela apresentada na tecla.</p>
+</div>
+<div class="paragraph">
+<p>A aplicação criptsetup é usada para encriptar a unidade. Para saber mais, escreva após a instalação:<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>man cryptsetup</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Speakup">Combinação de teclas para o leitor de ecrã Speakup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Este capítulo destina-se a utilizadores que necessitam de um leitor de ecrã mas não conhecem o Speakup.</p>
+</div>
+<div class="paragraph">
+<p>Mantenha o numlock desligado para usar o Speakup.</p>
+</div>
+<div class="paragraph">
+<p>A tecla CapsLock é utilizada como uma tecla shift. Por exemplo, "CapsLock 4" significa:<br>
+manter premida a tecla CapsLock como uma tecla shift e premir 4.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Primeiras combinações de teclas a lembrar:
+PrintScreen         Alternar speakup on/off.
+CapsLock F1         Ajuda do Speakup (prima Espaço para sair da ajuda).</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Combinação de teclas para alterar definições:
+CapsLock 1/2        Diminuir/Aumentar o volume de som.
+CapsLock 5/6        Diminuir/Aumentar a frequência da voz.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre> Combinação de teclas para rever o ecrã:
+ CapsLock j/k/l      Dizer Anterior/Atual/Seguinte palavra.
+ CapsLock k (twice)  Soletrar palavra atual.
+ CapsLock u/i/o      Dizer Anterior/Atual/Seguinte linha.
+ CapsLock y          Dizer do topo do ecrã para o cursor de leitura.
+ CapsLock p          Dizer da leitura da linha do cursor ao fundo do ecrã.
+// First_steps</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="first_steps_after_installation">Primeiros passos após a instalação</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Aqui estão as primeiras tarefas a serem executadas após a instalação</p>
+</div>
+<div class="paragraph">
+<p>Neste documento, todo o texto depois de um carácter # são comentários dos comandos sugeridos, não a serem introduzidos.</p>
+</div>
+<div class="sect2">
+<h3 id="_atualização_inicial_do_software">Atualização inicial do software</h3>
+<div class="paragraph">
+<p>Após a instalação, o sistema deve ser atualizado para obter a mais recentemente fornecida versão de cada software, assim como o novo software fornecido desde a versão da ISO. Isto é especialmente necessário se nenhuma ligação de rede estiver disponível durante a instalação, como então apenas os pacotes incluídos no suporte da distribuição foram instalados, e eles podem estar desatualizados.</p>
+</div>
+<div class="paragraph">
+<p>A maioria dos comandos introduzidos abaixo solicita um direito administrativo associado a uma conta específica chamada 'root', para o qual gravou uma palavra-passe durante a instalação.</p>
+</div>
+<div class="paragraph">
+<p>Para emitir um comando como 'root', primeiro escreva</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>su -</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>de seguida, emita a palavra-passe para o root e prima Enter antes de escrever o comando.</p>
+</div>
+<div class="paragraph">
+<p>Quando terminar de emitir comandos como 'root', pressione Ctrl+d ou escreva 'exit' para obter de volta o estado de "utilizador".</p>
+</div>
+<div class="paragraph">
+<p>Em alternativa, o utilizador registado durante a instalação e outros membros do grupo 'wheel' podem escrever:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sudo &lt;command&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>depois também a palavra-passe para o root.</p>
+</div>
+<div class="paragraph">
+<p>Para atualizar, escreva como root numa consola ou terminal gráfico:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>slapt-get --add-keys # recupera as chaves para autenticar os pacotes
+slapt-get -u # atualiza a lista de pacotes nos "mirrors"
+slapt-get --install-set slint # obtêm os novos pacotes
+slapt-get --upgrade # obtêm as novas versões dos pacotes instalados
+dotnew # mostra as alterações nos ficheiros de configuração</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Quando estiver a executar o dotnew, aceite substituir todos os ficheiros de configuração antigos pelos novos. Isto é seguro, pois ainda não fez nenhuma personalização.</p>
+</div>
+<div class="paragraph">
+<p>Em alternativa, pode usar estes front-ends gráficos: gslapt em vez do slapt-get, e dotnew-gtk em vez do dotnew.</p>
+</div>
+<div class="paragraph">
+<p>Para saber mais sobre o slapt-get, escreva:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>man slapt-get</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ou como root:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>slapt-get --help</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>e leia o /usr/doc/slapt-get*/README.slaptgetrc.Slint</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_glossário">Glossário</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Várias definições neste glossário são tiradas ou adaptadas da <a href="https://en.wikipedia.org/wiki/Main_Page">Wikipédia</a> e <a href="https://pubs.opengroup.org/onlinepubs/9699919799/">POSIX</a></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="application"></a>Aplicação</dt>
+<dd>
+<p>Um programa de aplicação (aplicação por abreviatura) é um programa de computador projetado para realizar uma tarefa específica normalmente solicitada por utilizadores.</p>
+<div class="paragraph">
+<p>As aplicações não são geralmente consideradas como parte do sistema operativo, o que significa que elas podem ser adicionadas ao sistema após a sua instalação. Elas executam funções não relacionadas com o sistema, tais como processamento de texto, desenho de arquitetura, desenho mecânico, publicações, ou análise financeira.</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="boot"></a>Arranque</dt>
+<dd>
+<p>Arranque significa ligar um computador para iniciar um sistema operativo. Vários sistemas operativos podem ser instalados no mesmo computador. Selecione qual para carregar na RAM e executar pode ser feito pelo firmware ou por um software chamado gestor de arranque (GRUB no caso do Slint). O firmware de um computador pode suportar um dos seguintes modos de arranque, ou ambos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>No modo Legacy ou BIOS, o sistema operativo é carregado executando as instruções gravadas num sector de arranque(boot).</p>
+</li>
+<li>
+<p>No modo EFI, o carregador do sistema operativo é um programa armazenado num ficheiro executável, localizado num diretório de uma partição do sistema EFI (ESP).</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1"><a id="CPU"></a>CPU</dt>
+<dd>
+<p>A Unidade de Processamento Central ou CPU executa as instruções dos programas.</p>
+</dd>
+<dt class="hdlist1"><a id="command"></a>Comando</dt>
+<dd>
+<p>O comando é definido por <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_104">POSIX</a> como "uma diretiva para uma <a href="#shell">shell</a> para executar uma tarefa específica".</p>
+<div class="paragraph">
+<p>A tarefa a ser executada pode ser uma <a href="#application">aplicação</a> ou um <a href="#utility">utilitário</a>.</p>
+</div>
+<div class="paragraph">
+<p>A estrutura básica dos comandos da shell é definida no capítulo <a href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_09">2.9 Shell Commands</a> da especificação POSIX.</p>
+</div>
+<div class="paragraph">
+<p>Exemplos de comandos são fornecidos em <a href="#bash shell">[bash shell]</a>.</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="console"></a>Consola</dt>
+<dd>
+<p>A palavra "consola" refere-se ao início dos sistemas de computador, quando o administrador de sistema escreveu comandos num dispositivo, incluindo um teclado e uma impressora, ligados ao computador, aos comandos introduzidos e resultado do computador sendo impresso na consola, fornecendo um registo de ambos.</p>
+<div class="paragraph">
+<p>Em computadores pessoais, o utilizador escreve os comandos no teclado e o seu resultado é impresso num ecrã, que podem ser separados ou integrados no computador como num portátil.</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="device"></a>Dispositivo</dt>
+<dd>
+<p>Um periférico do computador ou um objeto que aparece na aplicação como tal.[POSIX]</p>
+</dd>
+<dt class="hdlist1"><a id="directory"></a>Diretório</dt>
+<dd>
+<p>Um diretório é outro nome para uma pasta. Sistemas de ficheiros usam diretórios para organizar ficheiros dentro de partições.</p>
+<div class="paragraph">
+<p>Os diretórios podem conter ficheiros e também outros diretórios. A estrutura resultante pode ser representada como uma árvore invertida. O diretório de nível superior de uma unidade é nomeado como diretório root. No Linux, o carácter / separa os níveis da árvore. A / sozinha representa o diretório root, /home hospeda os ficheiros pertencentes a utilizadores, /home/hugo hospeda os ficheiros que pertencem ao diretório do utilizador hugo. /root hospeda os ficheiros root nomeados pelo utilizador (o administrador do sistema). Nota: 'root' pode se referir ao diretório de nível superior ou ao administrador do sistema.</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="drive"></a>Unidade</dt>
+<dd>
+<p>Uma unidade é um dispositivo que armazena dados não voláteis, o que significa que os dados não são apagados quando a energia é desligada. Exemplos: discos rígidos, SSD, dispositivos USB, leitores de cartões, eMMC.</p>
+<div class="paragraph">
+<p>O meio de armazenamento dos dados pode ser permanentemente ligado à unidade ou removível como cartões SD, dispositivos USB e discos ligados através de USB.</p>
+</div>
+<div class="paragraph">
+<p>Um sistema operativo instalado num suporte removível ou numa unidade externa é dito portátil: o mesmo pode ser movido de um computador para outro.</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="display_manager"></a>Gestor de ecrã</dt>
+<dd>
+<p>Um gestor de ecrã (ou gestor de acesso) é um software que mostra uma janela no qual pede o nome de acesso e a palavra-passe do utilizador, depois inicia o ambiente gráfico escolhido pelo referido utilizador.</p>
+</dd>
+<dt class="hdlist1"><a id="encryption"></a>Encriptação</dt>
+<dd>
+<p>A encriptação é o processo de conversão de dados numa forma não reconhecida ("encriptado"). É normalmente usado para proteger informações confidenciais para que apenas pessoas autorizadas possam visualizá-las. Um único ficheiro ou diretório, uma partição também como uma unidade inteira pode ser encriptada, que o tornam acessível apenas após ter escrito um pequeno texto chamado de palavra-passe, mantido em segredo.</p>
+</dd>
+<dt class="hdlist1"><a id="file"></a>Ficheiro</dt>
+<dd>
+<p>Um ficheiro de computador é um conjunto de dados digitais reunidos com o mesmo nome, gravados num meio de armazenamento permanente, chamado de armazenamento em massa, como um disco rígido, um SSD, um DVD, um cartão SD ou uma pen USB e tratado como uma unidade.</p>
+<div class="paragraph">
+<p>Os ficheiros podem conter dados como textos, imagens, sons, vídeos ou programas de computador.</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="file_system"></a>Sistema de ficheiros</dt>
+<dd>
+<p>Um sistema de ficheiros é um software que gere os ficheiros e diretórios de uma partição. Memoriza o local no suporte físico dos dados contidos nos ficheiros, permitindo lê-los ou grava-los. Exemplos de sistemas de ficheiros usados são vfat, ntfs, ext4, f2fs. Este comando lista todos os sistemas de ficheiros que permitem ler os dados contidos numa partição do Linux:</p>
+<div class="listingblock">
+<div class="content">
+<pre>cat /proc/filesystems|grep -v nodev</pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="firmware"></a>Firmware</dt>
+<dd>
+<p>Um firmware é um software que inicializa e verifica o hardware, depois ou é selecionado e carregado na RAM do sistema operativo, ou inicia um software chamado gestor de arranque que fará isso. O firmware é mantido em memórias não-voláteis dispositivos como ROM, EPROM ou flash memória. É o primeiro software executado ao arrancar um computador. Fornece um menu permitindo configurar o hardware e selecionar em que modo (Legacy ou EFI) arranca e em que ordem procura o sistema operativo ou outra aplicação (como o Gestor de arranque GRUB) a executar.</p>
+</dd>
+<dt class="hdlist1"><a id="kernel"></a>Kernel</dt>
+<dd>
+<p>Um kernel Linux é o software no núcleo de um sistema Slint que lida com as interações entre as aplicações e o hardware.</p>
+<div class="paragraph">
+<p>Apresenta-se como um único ficheiro, instalado no diretório /boot. Por exemplo, o ficheiro /boot/vmlinuz-generic-5.12.11 é um kernel, vindo de um pacote genérico.</p>
+</div>
+<div class="paragraph">
+<p>No arranque o kernel é copiado para a RAM.</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="initrd"></a>Initrd</dt>
+<dd>
+<p>Um initrd (mais precisamente uma initramfs ou sistema e ficheiros inicial RAM para o Slint) é um sistema Linux fornecido como um ficheiro comprimido. No arranque, logo após o kernel ser carregado na RAM, o inird também é carregado na RAM. O seu ficheiro /init executa: carrega os módulos kernel necessários na RAM, regista os dispositivos, possivelmente desbloqueia o dispositivo root, monta o pseudo sistema de ficheiros e depois muda para o sistema de ficheiros root para iniciar o sistema de verdade.</p>
+<div class="paragraph">
+<p>Um initrd apresenta-se como um único ficheiro, instalado no diretório boot. Por exemplo, o ficheiro initrd-generic-5.12.11 é um initrd</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="live_system"></a>Sistema "live"</dt>
+<dd>
+<p>Um sistema 'live' é um sistema operativo que, ao invés de ser instalado num dispositivo como um disco rígido ou SSD, encontra-se inteiramente na <a href="#RAM">RAM</a>.</p>
+<div class="paragraph">
+<p>Um initrd é também um sistema "live", assim como um instalador do Slint que é basicamente um initrd.</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="partition"></a>Partição</dt>
+<dd>
+<p>Uma partição é uma secção de um meio de armazenamento, como um disco rígido ou SSD. É tratada pelo sistema operativo como um volume lógico separado, o que o faz funcionar de forma semelhante a um suporte separado.</p>
+</dd>
+<dt class="hdlist1"><a id="partition_table"></a>Tabela de partições</dt>
+<dd>
+<p>Uma tabela de partições é a estrutura permanente que regista como as informações são posicionadas num suporte, principalmente gravar o início e o fim de cada partição no suporte.</p>
+<div class="paragraph">
+<p>Os tipos mais comuns de tabelas de partições são a tabela de partições DOS, inicialmente usada pelo sistema operativo MS-DOS, e a tabela de partições do GUID ou GPT, que permite lidar com mais partições e unidades maiores.</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="program"></a>Programa</dt>
+<dd>
+<p>Uma sequência de instruções preparada para o sistema realizar uma tarefa definida. O termo "programa" engloba aplicações escritas na Linguagem de Comando Shell, linguagens de entrada de utilidade complexa (por exemplo, awk, lex, e assim por diante) e linguagens de alto nível. [POSIX]</p>
+</dd>
+<dt class="hdlist1"><a id="RAM"></a>RAM</dt>
+<dd>
+<p>RAM significa Memória de Acesso Aleatório. Este tipo de dispositivo armazena dados voláteis, o que significa que os dados são apagados quando a energia é desligada.</p>
+</dd>
+<dt class="hdlist1"><a id="shell"></a>Shell</dt>
+<dd>
+<p>Um programa que interpreta sequências de entrada de texto como comandos. Pode operar num fluxo de entrada ou pode alertar e ler comandos de um terminal de forma interativa. A sintaxe dos comandos que podem ser interpretados pela shell pode variar dependendo da shell em uso, mas são principalmente definidos no capítulo <a href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html">2. Shell Command Language</a> da especificação POSIX.</p>
+<div class="paragraph">
+<p>O Slint vem com vários programas atuando como shell, listados no ficheiro /etc/shells. A shell <strong>bash</strong> é usada por padrão.</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="swap"></a>Swap</dt>
+<dd>
+<p>Um espaço swap é utilizado para armazenar dados previamente na RAM num dispositivo como um disco rígido ou SSD, quer porque caso contrário a RAM ficaria cheia, quer para espaço livre na RAM para armazenar ali os dados mais frequentemente utilizados. O espaço swap pode ser uma partição numa unidade do tipo 'Linux swap' ou um ficheiro comum armazenado numa partição existente. Há também a 'swap in zram': neste caso, os dados são armazenados na RAM, mas em formato comprimido.</p>
+</dd>
+<dt class="hdlist1"><a id="terminal"></a>Terminal</dt>
+<dd>
+<p>Historicamente, um terminal é um dispositivo físico composto por um teclado e um ecrã usado para escrever comandos e receber respostas de um computador remoto.</p>
+<div class="paragraph">
+<p>Hoje em dia os comandos podem ser introduzidos no modo consola (ou texto) ou no modo gráfico.</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="utility"></a>Utilitário</dt>
+<dd>
+<p>Um utilitário é um programa que pode ser chamado pelo nome de uma shell (este também é o caso de algumas <a href="#application">aplicações</a>).</p>
+<div class="paragraph">
+<p>Os utilitários são parte do sistema operativo (mas não do kernel).Executam funções relacionadas com o sistema, como listar conteúdo de diretórios, verificação do sistema de ficheiros, reparação do sistemas de ficheiros ou extração de informações do estado do sistema.</p>
+</div>
+<div class="paragraph">
+<p>Um utilitário pode ser invocado como um programa separado que executa num programa diferente do que o intérprete de linguagem de comando, ou pode ser implementado como uma parte do intérprete de linguagem de comando.</p>
+</div>
+<div class="paragraph">
+<p>Por exemplo, o comando echo (a diretiva para executar uma tarefa específica) pode ser implementado de tal forma que o utilitário echo (a lógica que executa a tarefa de echoing) esteja num programa separado; portanto, é executado num processo diferente do interpretador de linguagem de comando. Praticamente isto significa que neste caso o utilitário é um programa distinto da shell</p>
+</div>
+<div class="paragraph">
+<p>Por outro lado, a lógica que executa o utilitário echo poderia ser embutida no interpretador de linguagem de comando; portanto, poderia executar no mesmo processo que o interpretador de linguagem de comandos. Diz-se que tal utilitário é "embutido" na shell.</p>
+</div>
+</dd>
+<dt class="hdlist1"><a id="virtual_terminal"></a>Terminal virtual</dt>
+<dd>
+<p>Um terminal virtual é um software que simula um terminal físico, dispositivo composto por um teclado e um ecrã que permite comunicar remotamente com um computador.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2025-06-28 23:09:24 +0200
+</div>
+</div>
+</body>
+</html>

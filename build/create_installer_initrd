@@ -1,0 +1,135 @@
+#!/bin/sh
+# shellcheck disable=SC1090
+[ "$#" -ne 1 ] && echo "usage: $0 [salix|slackware|slint]" && exit
+distribution="$1"
+if [ ! "$distribution" = salix ] && [ ! "$distribution" = slackware ] && [ ! "$distribution" = slint ]; then
+	echo "$distribution= is not a supported distribution"
+	exit
+fi
+. ./set_variables_"$distribution"
+if [ ! "$(id -u)" -eq 0 ]; then
+  echo "Please execute this script as root."
+  exit
+fi
+# Unpack the slackare initrd
+if [ ! -f "$ROOTDIR"/initrd.img ]; then
+	# If not accessible locally, get the initrd from Slackware64-15.0 from
+	# a remote Slackware mirror
+	cp  /data/repos/slackware-15.0/EFI/BOOT/initrd.img "$ROOTDIR" || \
+	wget https://slackware.uk/slackware/slackware64-15.0/EFI/BOOT/initrd.img
+fi
+USER=$(stat -c %U .)
+rm -rf  "$ROOTDIR"/initrd-tree
+mkdir "$ROOTDIR"/initrd-tree
+(cd "$ROOTDIR"/initrd-tree
+xz -dc "$ROOTDIR"/initrd.img | cpio -di
+du -sh
+rm -rf lib/modules/*
+du -sh
+)
+chown -R "$USER": "$ROOTDIR"/initrd-tree
+# Customize the initrd
+# Install in the installer packages also needed early during installation
+# (before setting swapinzram to allow installing more with limited RAM)  
+spkg -i --root "$DEST" "$ISODIR"/slint/alsa-utils*t?z
+spkg -i --root "$DEST" "$ISODIR"/slint/spkg*t?z
+spkg -i --root "$DEST" "$ISODIR"/slint/swapinzram*t?z
+spkg -i --root "$DEST" "$ISODIR"/slint/xz*t?z
+spkg -i --root "$DEST" "$ISODIR"/slint/gettext-0*t?z
+spkg -i --root "$DEST" "$ROOTDIR"/packages/brltty.installer*t?z
+spkg -i --root "$DEST" "$ROOTDIR"/packages/espeakup-installer*t?z
+spkg -i --root "$DEST" "$ROOTDIR"/packages/firmware-installer*t?z
+spkg -i --root "$DEST" "$ROOTDIR"/packages/modules-installer*t?z
+spkg -i --root "$DEST" "$ROOTDIR"/packages/links-installer*t?z
+spkg -i --root "$DEST" "$ROOTDIR"/packages/w3m-installer*t?z
+spkg -i --root "$DEST" "$ROOTDIR"/packages/installer-translations-${distribution}*t?z
+# remove files we won't need during installation
+rm -rf "$DEST"/usr/lib64/python*
+rm -rf "$DEST"/usr/doc/*
+rm -rf "$DEST"/usr/man/*
+rm -f "$DEST"/usr/bin/dbus-launch
+# Include some files available in "$ROOTDIR/files_in_the_initrd.list"
+while read -r i; do
+	[ ! "$i" ] && continue
+	echo "$i included in the installer "
+	mkdir -p "$DEST"/"$(dirname "$i")"
+	cp -r "$SCRIPTS"/"$(basename "$i")" "$DEST"/"$(dirname "$i")"
+	chmod 0755 "$DEST"/"$(dirname "$i")"/"$(basename "$i")"
+done < "$ROOTDIR"/files_in_the_initrd.list
+# Writes files allowing to identify the ISO and the distribution
+echo "$ISOVERSION" > "$DEST"/tmp/isoversion
+echo "$ISOLABEL" > "$DEST"/tmp/isolabel
+echo "$DISTRIBUTION" > "$DEST"/tmp/distro
+# Include all packages sets
+cp -r "$ROOTDIR"/sets "$DEST"
+cp "$ROOTDIR"/files-in-initrd/start"$distribution" "$DEST"/sbin/start || exit
+
+chmod 755 "$DEST"/sbin/start
+echo '#Empty file' > "$DEST"/etc/asound.conf
+# Include the documentation about installation and its translation
+mkdir -p "$DEST"/usr/docinstaller
+cp "$ROOTDIR"/doc/*html "$DEST"/usr/docinstaller
+cp "$ROOTDIR"/doc/doc "$DEST"/bin/
+chmod 0755 "$DEST"/bin/doc
+chmod 0644 "$DEST"/usr/docinstaller/*
+# Copy the font we need in the installer
+mkdir -p "$DEST"/usr/share/fonts
+cp "$ROOTDIR"/fonts/* "$DEST"/usr/share/fonts
+# Allow to restore default espeakup settings during installation
+cp -a /usr/sbin/speakup-restore "$DEST"/sbin/
+rm -rf "DEST"/usr/lib/setup
+chmod 755 "$DEST"/etc/rc.d/rc.espeakup
+chmod 755 "$DEST"/sbin/inst
+chmod 755 "$DEST"/etc/profile.d/alias.sh
+chmod 755 "$DEST"/sbin/alsa-info.sh
+chmod 755 "$DEST"/etc/rc.d/rc.alsa
+# We have included alsa-info.sh in the initrd. To update it:
+# wget --no-check-certificate -nv http://www.alsa-project.org/alsa-info.sh 2>/dev/null
+chmod 644 "$DEST"/usr/share/alsa/soundcards.conf
+chmod 644 "$DEST"/usr/share/alsa/utils.sh
+(cd "$DEST"/usr/bin || exit
+ln -sf ../../bin/bash bash
+)
+mkdir -p "$DEST"/usr/lib64/locale
+. "$ROOTDIR"/files-in-initrd/SeTlocales
+while read -r Locale; do
+	ll=$(echo "$Locale"|cut -c 1-2)
+	# the script SeTlocales provides the functions SeTCode and SeTLocaleDir
+	SeTLocaleDir
+	# Include the files gettext needs in /usr/lib64/locale.
+	mkdir -p "$DEST"/usr/share/locale/"$LocaleDir"/LC_MESSAGES
+	cp -r  /usr/lib64/locale/"$Locale" \
+		"$DEST"/usr/lib64/locale
+	if [ -f  /usr/share/locale/"$LocaleDir"/LC_MESSAGES/gettext-runtime.mo ]; then
+		cp /usr/share/locale/"$LocaleDir"/LC_MESSAGES/gettext-runtime.mo \
+		"$DEST"/usr/share/locale/"$LocaleDir"/LC_MESSAGES
+	elif [ -f /usr/share/locale/"$ll"/LC_MESSAGES/gettext-runtime.mo ]; then
+		cp /usr/share/locale/"$ll"/LC_MESSAGES/gettext-runtime.mo \
+		"$DEST"/usr/share/locale/"$LocaleDir"/LC_MESSAGES
+	fi
+	if [ -f /usr/share/locale/"$LocaleDir"/LC_MESSAGES/dialog.mo ]; then
+		cp /usr/share/locale/"$LocaleDir"/LC_MESSAGES/dialog.mo \
+		"$DEST"/usr/share/locale/"$LocaleDir"/LC_MESSAGES
+	elif [ -f /usr/share/locale/"$ll"/LC_MESSAGES/dialog.mo ]; then
+		cp /usr/share/locale/"$ll"/LC_MESSAGES/dialog.mo \
+		"$DEST"/usr/share/locale/"$LocaleDir"/LC_MESSAGES
+	fi
+	if [ -f  /usr/share/locale/"$LocaleDir"/LC_MESSAGES/util-linux.mo ]; then
+		cp /usr/share/locale/"$LocaleDir"/LC_MESSAGES/util-linux.mo \
+		"$DEST"/usr/share/locale/"$LocaleDir"/LC_MESSAGES
+	elif [ -f /usr/share/locale/"$ll"/LC_MESSAGES/util-linux.mo ]; then
+		cp /usr/share/locale/"$ll"/LC_MESSAGES/util-linux.mo \
+		"$DEST"/usr/share/locale/"$LocaleDir"/LC_MESSAGES
+	fi
+	if [ -f  /usr/share/locale/"$LocaleDir"/LC_MESSAGES/nano.mo ]; then
+		cp /usr/share/locale/"$LocaleDir"/LC_MESSAGES/nano.mo \
+		"$DEST"/usr/share/locale/"$LocaleDir"/LC_MESSAGES
+	elif [ -f /usr/share/locale/"$ll"/LC_MESSAGES/nano.mo ]; then
+		cp /usr/share/locale/"$ll"/LC_MESSAGES/nano.mo \
+		"$DEST"/usr/share/locale/"$LocaleDir"/LC_MESSAGES
+	fi
+done < "$ROOTDIR"/doc/locales_list_sorted_by_name
+# write and put in place the customized initrd
+echo "write and put in place the customized initrd..."
+cd "$DEST" || exit 1
+	find . | cpio -o -H newc | xz -9fv -C crc32 > "$ISODIR"/initrd

@@ -1,0 +1,2 @@
+The choice of default desktop during installation is not honored in the lightdm greeter
+The GRUB menu shows Linux with Linux <version> instead of <Distribution> with Linux <version>

@@ -1,0 +1,52 @@
+#!/bin/sh
+cd .. 1>/dev/null ||  exit 1
+ROOTDIR=$(pwd)
+export ROOTDIR
+cd - 1>/dev/null || exit 1
+PKGNAM=slint-installer
+export PKGNAM
+KVER=6.12.44
+export KVER
+SLACKROOT="/data/repos/slackware-15.0"
+export SLACKROOT
+SLACKREPO="$SLACKROOT"/slackware64
+export SLACKREPO
+PATCHES="$SLACKROOT"/patches/packages
+export PATCHES
+SLINTROOT=/repo/x86_64/slint-15.0
+export SLINTROOT
+SLINTREPO="$SLINTROOT"/slint
+export SLINTREPO
+ARCH="$(uname -m)"
+export ARCH
+SOURCE="/repo/x86_64/slint-15.0/source"
+export SOURCE
+ISOVERSION="15.0-beta3"
+export ISOVERSION
+ISOLABEL="slintslack$ISOVERSION"
+export ISOLABEL
+SLINTVERSION="15.0"
+export SLINTVERSION
+SLACKVERSION="15.0"
+export SLACKVERSION
+REGULARUSER="$(stat -c %U "$(pwd)")"
+export REGULARUSER
+DEST="$ROOTDIR"/initrd-tree
+export DEST
+ISODIR=/home/didier/iso64
+export ISODIR
+SCRIPTS="$ROOTDIR"/files-in-initrd
+export SCRIPTS
+DATESTAMP="$(date -u +%Y%m%d)"
+export DATESTAMP
+PATHTOISO=/repo/x86_64/slint-15.0/iso/slintslack64-"${ISOVERSION}".iso
+export PATHTOISO
+INSTALLERVERSION=15.0
+export INSTALLERVERSION
+SLINTDOCS="$ROOTDIR/slint-translations"
+export SLINTDOCS
+export LANG=C
+SETS="bootstrapslackware aaa_base slackware slintslack"
+export SETS
+DISTRIBUTION=slackware
+export DISTRIBUTION

@@ -1,0 +1,48 @@
+#!/bin/sh
+[ "$(id -u)" -eq 0 ] && echo "Run this script as regular user." && exit
+[ "$(id -un)" = didier ] && [ "$(findmnt /data)" = "" ] && \
+echo "/data is not mounted." && exit
+[ "$#" -ne 1 ] && echo "usage: $0 [salix|slackware|slint]" && exit
+distribution="$1"
+if [ ! "$distribution" = salix ] && [ ! "$distribution" = slackware ] && [ ! "$distribution" = slint ]; then
+	echo "$distribution= is not a supported distribution"
+	exit
+fi
+cd .. 1>/dev/null ||  exit 1
+ROOTDIR=$(pwd)
+cd - 1>/dev/null || exit 1
+# SLINTDOCS should be a (copy of) a clone of:
+# https://github.com/DidierSpaier/slint-translations.git
+rm -rf "$ROOTDIR/slint-translations"
+cp -a /data/github/slint-translations "$ROOTDIR" || exit
+SLINTDOCS="$ROOTDIR/slint-translations"
+# We need the versions of the scripts functions and rc.S source of
+# the auto.pot and rc.S.pot files stored on Crowdin as sources
+# of the translations (po files) from which we generate the mo
+# files put in the installer-translations package that we will
+# install in the initrd
+if [ "$distribution" = salix ]; then
+	sed 's@Slint@Salix@g' "$SLINTDOCS/sources/rc.S/rc.S" > \
+	"$ROOTDIR/files-in-initrd/rc.S"
+else
+	cp "$SLINTDOCS/sources/rc.S/rc.S" "$ROOTDIR/files-in-initrd"
+fi
+if [ "$distribution" = salix ]; then
+	sed 's@Slint@Salix@g' "$SLINTDOCS/sources/auto/functions" > \
+	"$ROOTDIR/files-in-initrd/functions"
+else
+	cp "$SLINTDOCS/sources/auto/functions" "$ROOTDIR/files-in-initrd"
+fi
+if [ "$distribution" = slackware ]; then
+	sed 's@Slint@Slackware@g' "$SLINTDOCS/sources/rc.S/rc.S" > \
+	"$ROOTDIR/files-in-initrd/rc.S"
+else
+	cp "$SLINTDOCS/sources/rc.S/rc.S" "$ROOTDIR/files-in-initrd"
+fi
+if [ "$distribution" = slackware ]; then
+	sed 's@Slint@Slackware@g' "$SLINTDOCS/sources/auto/functions" > \
+	"$ROOTDIR/files-in-initrd/functions"
+else
+	cp "$SLINTDOCS/sources/auto/functions" "$ROOTDIR/files-in-initrd"
+fi
+cp "$SLINTDOCS/sources/SeTkeymap/SeTkeymap" "$ROOTDIR/files-in-initrd"
