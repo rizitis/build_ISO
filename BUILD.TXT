@@ -30,26 +30,19 @@ some of which take as argument $distribution.
 1. get_latest_scripts get the latest versions of scripts used during installation and adapt them to
    $distribution
 2. populate_iso_dir fetches and stores the packages to be included in the ISO in the directory
-   $ISODIR directory that it creates.
-3. add_metadata_to_the_iso adds to $ISODIR the metadata assoiated to the packages and a few files.
-4. add_boot_equipment_to_the_iso adds to $ISODIR a directory /boot/grub and writes in it the file
-   grub.cfg.
-4. unpack_slackware_initrd unpack the file initrd.img got from 
-   https://slackware.uk/slackware/slackware64-15.0/EFI/BOOT/initrd.img in ./initrd-tree.
-5. customize_the_initrd adds to the initramfs packages needed to make the installer accessible with
-   braille and speech and polyglot, includes files used to manage installation and customizes it for
-   $distribution.
-6. create_installer_initrd unpack the file initrd.img got from 
+   $ISODIR directory that it creates, then adds to $ISODIR a directory boot/grub and writes in it
+   the file grub.cfg.
+3. add_metadata_to_the_iso adds to $ISODIR the metadata associated to the packages and a few files.
+4. create_installer_initrd unpack the file initrd.img got from 
    https://slackware.uk/slackware/slackware64-15.0/EFI/BOOT/initrd.img in ./initrd-tree then adds
    files and packages needed to make the installer accessible with braille and speech and polyglot,
    manage installation and customizes it for $distribution, last writes $ISODOR/initrd.
-7. write_the_iso writes the ISO image.
+5. write_the_iso writes the ISO image.
 
 These steps should be performed running the scripts in the following order:
 
-prerequistes-|->populate_iso_dir---|->add_metadata_to_the_iso----------|
-             |->get_latest_scripts-|->add_booting_equipment_to_the_iso_|->write_the_iso
-                                   |->create_installer_initrd----------| 
+prerequistes-|->populate_iso_dir---|->add_metadata_to_the_iso-|
+             |->get_latest_scripts-|->create_installer_initrd-|->write_the_iso 
 TIPS:
 - you can can set and export distribution and run all scripts with $distribution as argument. 
 - if you wrote an ISO and find an issue with the initrd, once fixed you can rebuild and update it
