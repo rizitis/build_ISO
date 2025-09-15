@@ -7,6 +7,6 @@ kernel
 kernel-headers
 kernel-source
 liblouis
-salix-tools
+salixtools
 slint-scripts
 swapinzram

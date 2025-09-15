@@ -1,8 +1,0 @@
-# This is the configuration file used to fetch the packages to install in
-# Slackware64-15.0
-# Working directory for local storage/cache.
-WORKINGDIR=/SLINT/var/slapt-get
-# The Slackware repository:
-SOURCE=https://slackware.uk/salix/x86_64/slackware-15.0/:PREFERRED
-# PACKAGES in the ISO
-SOURCE=file:///ISO/:DEFAULT

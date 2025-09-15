@@ -1,7 +1,0 @@
-CONTENT.TXT
-===========
-
-Date: <date>
-    
-The full content of +version+ is shown below
-

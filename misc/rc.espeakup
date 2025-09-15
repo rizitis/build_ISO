@@ -1,0 +1,89 @@
+#!/bin/sh
+
+# Create '/dev/(soft)synth' if not present
+(cd /dev
+if [ ! -c /dev/softsynth ]; then
+	mknod softsynth c 10 26
+fi
+if [ ! -c /dev/synth ]; then
+	mknod synth c 10 25
+fi
+)
+
+# Load the software synthesizer
+echo "soft" > /sys/accessibility/speakup/synth
+
+sleep 1
+
+# Permissions
+chmod 666 /sys/accessibility/speakup/soft/*
+echo 1 > /sys/accessibility/speakup/soft/direct
+if [ -f /etc/espeakup.conf ]; then
+	. /etc/espeakup.conf
+	[ ! "$rate" = "" ] && echo $rate > /sys/accessibility/speakup/soft/rate
+	[ ! "$vol" = "" ] && echo $vol > /sys/accessibility/speakup/soft/vol
+	[ ! "$pitch" = "" ] && echo $pitch > /sys/accessibility/speakup/soft/pitch
+	if [ ! "$language" = "" ]; then
+		setlanguage="$language"
+	else
+		setlanguage=${LANG%_*}
+	fi
+else
+	setlanguage=${LANG%_*}
+fi
+# Starts/stops/restarts espeakup
+espeakup_start() {
+  if [ ! "`ps -C espeakup --noheaders|wc -l`" = "0" ]; then
+    espeakup_status
+    exit
+  fi
+  if [ -x /usr/bin/espeakup ]; then
+    /usr/bin/espeakup -V $setlanguage
+  else
+    echo "/usr/bin/espeakup not found or non executable"
+  fi
+}
+
+
+espeakup_stop() {
+  NBPROC="`ps -C espeakup --noheaders|wc -l`"
+  if [ ! "$NBPROC" = "0" ]; then
+    PID="`ps -C espeakup --noheaders -o pid`"
+    kill $PID
+    # Restore the defaults
+    echo 2 > /sys/accessibility/speakup/soft/rate
+    echo 5 > /sys/accessibility/speakup/soft/vol
+    echo 5 > /sys/accessibility/speakup/soft/pitch
+  fi
+}
+
+espeakup_restart() {
+    espeakup_stop
+    sleep 2
+    espeakup_start
+}
+
+espeakup_status() {
+  NBPROC="`ps -C espeakup --noheaders|wc -l`"
+  if [ "$NBPROC" = "0" ]; then
+    echo "espeakup is not started" 
+  elif [ "$NBPROC" = "1" ]; then
+    echo "An espeakup daemon is running, PID: `ps -C espeakup --no-headers -o pid`"
+  else
+    ps -C espeakup -o pid,args
+  fi
+}
+
+case "$1" in
+    start)
+	    espeakup_start;;
+    stop)
+		espeakup_stop;;
+    restart)
+		espeakup_restart;;
+    status)
+		espeakup_status;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status}";;
+esac
+

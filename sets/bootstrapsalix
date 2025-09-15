@@ -20,3 +20,6 @@ sed
 salixtools
 sysvinit-scripts
 pam
+rootuser-settings
+user-settings
+user-settings-xfce

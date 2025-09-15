@@ -1,3 +1,0 @@
-#!/bin/sh
-# Display the keyboard shortcuts for reviewing the screen with speakup
-w3m -o confirm_qq=false /Speakup

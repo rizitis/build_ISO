@@ -5,7 +5,7 @@ export ROOTDIR
 cd - 1>/dev/null || exit 1
 PKGNAM=slint-installer
 export PKGNAM
-KVER=6.12.44
+KVER=6.12.47
 export KVER
 SLACKROOT="/data/repos/slackware-15.0"
 export SLACKROOT
@@ -35,18 +35,20 @@ DEST="$ROOTDIR"/initrd-tree
 export DEST
 ISODIR=/home/didier/iso64
 export ISODIR
-SCRIPTS="$ROOTDIR"/files-in-initrd
+SCRIPTS="$ROOTDIR"/misc
 export SCRIPTS
 DATESTAMP="$(date -u +%Y%m%d)"
 export DATESTAMP
-PATHTOISO=/repo/x86_64/slint-15.0/iso/slintslack64-"${ISOVERSION}".iso
+PATHTOISO=/repo/x86_64/slint-15.0/slintslack/slintslack64-"${ISOVERSION}".iso
 export PATHTOISO
 INSTALLERVERSION=15.0
 export INSTALLERVERSION
 SLINTDOCS="$ROOTDIR/slint-translations"
 export SLINTDOCS
 export LANG=C
-SETS="bootstrapslackware aaa_base slackware slintslack"
+SETS="bootstrapslackware aaa_base slackware slintslackware"
 export SETS
+MINSETS="bootstrapslackware aaa_base slackware"
+export MINSETS
 DISTRIBUTION=slackware
 export DISTRIBUTION
