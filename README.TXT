@@ -50,12 +50,12 @@ Customizing the ISO and the installer for $distribution is done mainly by two sc
 file ./build/set_variables_$distribution that sets variables among which $SETS, list of sets of
 packages to install in $distribution stored in ./sets.
 
-- populate_iso_dir stores in $ISODIR/slint the packages sets listed in $SETS for $distribution,
+- iso_dir stores in $ISODIR/slint the packages sets listed in $SETS for $distribution,
   using slapt-get with the slapt-getrc file "$ROOTDIR/misc/slapt-getrc.$distribution".
   It puts in $ISODIR/slint (for Slint) ot in $ISODIR/installer (for other distributions) packages
   that will be added to the initramfs by rc.S after having started it. For Slint it also adds
   packages only installed if the locale in their name fits the one selected by the user.
-- customize_the_initrd adds to the installer:
+- initrd adds to the installer:
   . the packages and files used to make it polyglot, accessible with speech and braille, including
     a package installer-translations-${distribution} built from po files adapted to $distribution,
   . the packages sets (list of packages to install) for all distributions and addonsinstaller, list
