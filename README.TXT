@@ -50,19 +50,17 @@ Customizing the ISO and the installer for $distribution is done mainly by two sc
 file ./build/set_variables_$distribution that sets variables among which $SETS, list of sets of
 packages to install in $distribution stored in ./sets.
 
-- iso_dir stores in $ISODIR/slint the packages sets listed in $SETS for $distribution,
-  using slapt-get with the slapt-getrc file "$ROOTDIR/misc/slapt-getrc.$distribution".
-  It puts in $ISODIR/slint (for Slint) ot in $ISODIR/installer (for other distributions) packages
-  that will be added to the initramfs by rc.S after having started it. For Slint it also adds
-  packages only installed if the locale in their name fits the one selected by the user.
+- iso_dir stores in $ISODIR/slint the packages sets to install, listed in $SETS for $distribution,
+  and those, listed in ./sets/addonintsaller, that will be added to the initramfs by /sbin/rc.S
+  after having started it. For Slint it adds the packages that will be installed if the locale in
+  their name fits the one selected by the user.
 - initrd adds to the installer:
   . the packages and files used to make it polyglot, accessible with speech and braille, including
     a package installer-translations-${distribution} built from po files adapted to $distribution,
-  . the packages sets (list of packages to install) for all distributions and addonsinstaller, list
-    of packages packages that the /etc/rc.d/rcS will add to the installer itself, stored in ./sets, 
+  . the lists of packages to install depending on the distribution, stored in ./sets, 
   . the installation scripts /etc/rc.d/rc.S, /sbin/functions and /sbin/start, the latter adapted to
-    the target $distribution, copying ./misc/start"$distribution" as /sbin/start, and the
-    files /slapt-getrc.installation$distribution.
+    the distribution, copying ./misc/start"$distribution" as /sbin/start, and the file
+    /slapt-getrc.installation$distribution.
 
 Installation is customized for $distribution:
 - through specific settings in /sbin/start:
@@ -81,8 +79,7 @@ The sets of packages used to install a distribution are:
 Packages' installation process:
 1. The script /etc/rc.d/rc.S (adapted from Slackware's installer) is started by init. After having
    enabled swap in zram to increase the usable RAM, it adds to the initramfs packages needed during
-   installation, cf. lines 82-140 of ./misc/rc.S. These packages, the same for all
-   distributions, are listed in ./sets/addonsinstaller
+   installation, cf. lines 82-138 of ./misc/rc.S.
 2. The script /sbin/start (customized for each distribution), started by the user typing start,
    does some distribution specific settings, then calls functions of /sbin/functions.
 3. The packages are installed in the target system by functions of /sbin/functions in the following
