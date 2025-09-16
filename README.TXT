@@ -40,11 +40,11 @@ some of which take as argument $distribution.
 These steps should be performed running the scripts in the following order:
 
 pre-requisites-|->get_scripts-|->installer-translations-|->iso_dir-|->metadata-|
-											            |->initrd--------------|->write_the_iso 
+											            |->initrd--------------|->write_iso 
 TIPS:
 - you can can set and export distribution and run all scripts with $distribution as argument. 
 - if you wrote an ISO and find an issue with the initrd, once fixed you can rebuild and update it in
-  $ISODIR running create_installer_initrd then write_the_iso, without running again other scripts. 
+  $ISODIR running initrd then write_iso, without running again other scripts. 
                                                                                   
 Customizing the ISO and the installer for $distribution is done mainly by two scripts sourcing the
 file ./build/set_variables_$distribution that sets variables among which $SETS, list of sets of
