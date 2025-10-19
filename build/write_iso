@@ -1,12 +1,12 @@
 #!/bin/sh
 # shellcheck disable=SC1090
-[ "$#" -ne 1 ] && echo "usage: $0 [salix|slackware|slint]" && exit
-distribution="$1"
+[ "$#" -ne 1 ] && distribution=slint
+[ ! "$distribution" ] && distribution="$1"
 if [ ! "$distribution" = salix ] && [ ! "$distribution" = slackware ] && [ ! "$distribution" = slint ]; then
-	echo "$distribution= is not a supported distribution"
+	echo "$distribution is not a supported distribution"
 	exit
 fi
-. ./set_variables_"$distribution"
+#. ./set_variables_"$distribution"
 if [ "$(id -u)" -eq 0 ]; then
   echo "Please execute this script as regular user."
   exit

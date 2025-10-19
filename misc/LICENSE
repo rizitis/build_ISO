@@ -1,6 +1,7 @@
 The text below this paragraph applies to all files in this directory but
 the file rc.S, modified from a script presumably written by Patrick
-Volkerding and included in a Slackware installer.
+Volkerding and included in a Slackware installer and the file probe_sound_cards
+derived from a file in a Debian installer.
 
 This is free and unencumbered software released into the public domain.
 

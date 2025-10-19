@@ -636,6 +636,10 @@ EOF
 		)
 	fi
 
+	# Make pulse the default audio output of speech-dispatcher as long as it will not be the case
+	# in the currently included package.
+	sed  's# AudioOutputMethod "libao"#AudioOutputMethod "pulse"#' etc/speech-dispatcher/speechd.conf > bof
+	mv bof etc/speech-dispatcher/speechd.conf
 
 	# Update slint-version if need be
 	echo "Slint 15.0" > etc/slint-version

@@ -1,22 +1,20 @@
 #!/bin/sh
 # shellcheck disable=SC1090
-[ "$#" -ne 1 ] && echo "usage: $0 [salix|slackware|slint]" && exit
-distribution="$1"
+[ "$#" -ne 1 ] && distribution=slint
+[ ! "$distribution" ] && distribution="$1"
 if [ ! "$distribution" = salix ] && [ ! "$distribution" = slackware ] && [ ! "$distribution" = slint ]; then
 	echo "$distribution is not a supported distribution"
 	exit
 fi
-. ./set_variables_"$distribution"
+# . ../build/set_variables_"$distribution"
+CWD=$(pwd)
 [ "$(id -u)" -eq 0 ] && echo "Run this script as regular user." && exit
 # Write the metadata
 printf "%b" "Write the metadata. This takes a while...\n"
 ( cd "$ISODIR" || exit
-printf "%b" "Running metagen all...\n"
-sh "$ROOTDIR/scripts/metagen.sh" all
-printf "%b" "Running metagen clean...\n"
-sh "$ROOTDIR/scripts/metagen.sh" clean
-printf "%b" "Running metagen md5...\n"
-sh "$ROOTDIR/scripts/metagen.sh" md5
+sh "$ROOTDIR"/build/metagen.sh all
+sh "$ROOTDIR"/build/metagen.sh clean
+sh "$ROOTDIR"/build/metagen.sh md5
 )
-cp "$SLINTROOT"/GPG-KEY "$ISODIR"
+wget -P "$ISODIR" "https::/$SLINTREMOTE/GPG-KEY"
 echo Metadata have been written.

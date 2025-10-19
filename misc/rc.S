@@ -3,7 +3,7 @@
 # rc.S:  Basic system initialization.
 # Modification of the file assumed to have been written by Patrick .J. Volkerding found in:
 # http://ftp.slackware.com/pub/slackware/slackware-15.0/source/installer/sources/initrd/skeleton_initrd.tar.gz
-# heavily modified by Didier Spaier didieratslintdotfr for the Slackware Linux distribution.
+# heavily modified by Didier Spaier didieratslintdotfr for the Slint Linux distribution.
 
 # Version included in slint64-15.0-6.iso
 
@@ -57,7 +57,7 @@ if grep -q speakup.synth /proc/cmdline; then
 fi
 sleep 1
 # espeakup initialization. This was done in previous versions just before running
-# /sbin/probe_sound_cards but there is no need to wait. 
+# /sbin/probe_sound_cards but there is no need to wait.
 # If a hard synth is set in the command line no need to start espeakup.
 # This could be done runnig "rc.espeakup start", but not knowing yet if espeakup will be really used,
 # instead case occuring espeakup will be started by /sbin/probe_sound_cards.
@@ -93,7 +93,6 @@ sleep 2
 	"$ISO"/$SUBDIR/dialog-*.t?z \
 	"$ISO"/$SUBDIR/dracut*txz \
 	"$ISO"/$SUBDIR/efibootmgr*.txz \
-	"$ISO"/$SUBDIR/espeak-ng*.txz \
 	"$ISO"/$SUBDIR/expat*.t?z \
 	"$ISO"/$SUBDIR/file-*txz \
 	"$ISO"/$SUBDIR/findutils*.t?z \
@@ -141,7 +140,7 @@ sleep 2
 tar -xJf "$ISO"/$SUBDIR/gpgme-1*.txz usr/lib64/libgpgme.so.11.25.0
 # We need libdbus-1.so.3 from the dbus package to make wpa_passphrase and
 # wpa_supplicat happy
-tar -xJf "$ISO"/$SUBDIR/dbus-1*.txz usr/lib64/libdbus-1.so.3.19.13	
+tar -xJf "$ISO"/$SUBDIR/dbus-1*.txz usr/lib64/libdbus-1.so.3.19.13
 ldconfig
 # Remove from alsa-utils and util-linux the utilities that we do not need at
 # all least if they lack dependencies.
@@ -152,7 +151,7 @@ rm -f \
 /usr/bin/setpriv \
 /usr/sbin/dnsmasq
 # We do not need the python lib pylibmount.so shipped in util-linux.
-# Actually we do not need /usr/lib/python2.7 at all.  
+# Actually we do not need /usr/lib/python2.7 at all.
 rm -rf /usr/lib64/python2.7
 # brltty is included in the initrd so that it be started by udev when applicable.
 # Start brltty if it has not yet been started by udev
@@ -198,7 +197,7 @@ set_voice () {
 	if [ "$lang" = gl ]; then
 		# Not supported by espeak yet, but pt should be fine enough, better
 		# than English anyway
-		# Comment above from Debian. We don't propose gv in Slackware yet, but
+		# Comment above from Debian. We don't propose gv in Slint yet, but
 		# maybe later ?
 		lang=pt
 	fi
@@ -268,12 +267,12 @@ it_IT.utf8 "$(gettext "Italian")" \
 pt_PT.utf8 "$(gettext "Portuguese (Portugal)")" \
 ru_RU.utf8 "$(gettext "Russian")" \
 sv_SE.utf8 "$(gettext "Swedish")" \
- 2> /tmp/.SlackwareInstallationLANG
+ 2> /tmp/.SlintInstallationLANG
 	mycmd="$?"
 	if [ "$mycmd" -ne 0 ]; then
-	echo "$INITLANG" > /tmp/.SlackwareInstallationLANG
+	echo "$INITLANG" > /tmp/.SlintInstallationLANG
 fi
-LANG=$(cat /tmp/.SlackwareInstallationLANG)
+LANG=$(cat /tmp/.SlintInstallationLANG)
 ll_TT=${LANG%.*}
 SeTlocales
 SeTKeymap
@@ -308,20 +307,20 @@ clear
 
 Version="$(cat /tmp/isoversion)"
 
-eval_gettext "Welcome to the Slackware installer! (version \${Version})
+eval_gettext "Welcome to the Slint installer! (version \${Version})
 
 You may now type (without the quotes):
 
 'doc' to know the features and usage of the installer.
 'start' to start the installation.
 
-The installer can prepare the drive where Slackware will be installed,
+The installer can prepare the drive where Slint will be installed,
 creating the the needed partitions. If you prefer you can do it yourself
 using command line utilities available in the installer, then type 'start'
 when done. You can also leave the installer and use a tool like gparted
 to do that then start the installer again.
 
 We recommend that you type 'doc' first in this case, or if you want to
-encrypt the root Slackware partition.
+encrypt the root Slint partition.
 When you finish reading this menu will be displayed again.
 "

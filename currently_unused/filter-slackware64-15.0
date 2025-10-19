@@ -1,0 +1,12 @@
+- /EFI
+- /deps
+- /isolinux
+- /kernels
+- /pasture
+- /source
+- /testing
+- */old-linux*/
+- /linux*/
+- /extra
++ /extra/aspell-word-lists/
++ /extra/aspell-word-lists/**

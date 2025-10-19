@@ -1,0 +1,9 @@
+#!/bin/sh
+#. ./set_variables_slint
+mkdir -p "$SLINTROOT"
+rsync -v --progress -aH \
+--exclude-from="$ROOTDIR"/build/excluded-from-slint64-15.0 \
+--partial --append-verify \
+--delete-excluded \
+--prune-empty-dirs \
+rsync://"$SLINTREMOTE/" "$SLINTROOT"  2>&1|tee thelog

@@ -1,0 +1,13 @@
+extra/
+extra/aspell-word-lists/
+extra/aspell-word-lists/**
+extra/llvm13-compat*
+extra/CHECKSUMS.md5
+extra/CHECKSUMS.md5.asc
+extra/GPG-KEY
+extra/PACKAGES.json
+extra/PACKAGES.TXT
+extra/PACKAGES.TXT.gz
+extra/FILE_LIST
+extra/MANIFEST.bz2
+extra/README.TXT

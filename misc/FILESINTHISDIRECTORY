@@ -1,0 +1,39 @@
+This document lists the files in this directory and their usage.
+All files marked I are put in the initrd running th script ../build/initrd in the location
+mentionned
+in the file files_in_the_initrd.list
+CONTENT.TXT
+	Stub of the CONTENT.TXT at the root of the ISO, completed by the script  ../build/iso-dir
+FILES
+	This file
+HOSTNAME I
+LICENSE (un)license of the documents in this directory
+README.TXT file put at te root of the ISO by the script  ../build/iso-dir
+SeTkeymap I
+SeTlocales I
+Speakup I
+alias.sh I
+alsa-info.sh I
+alsa.conf ???  Seems unused.
+deps_not_found.sh I
+files_in_the_initrd.list
+	Read by the script ../build/initrd to put the files marked I into place
+functions I
+hosts I
+inittab I
+inst I
+locales_list_sorted_by_name
+	Read by the script ../build/initrd to select the locales to include in the initrd
+nmconfig I
+probe_sound_cards I
+rc.S I
+rc.alsa
+rc.espeakup I
+rc.font I
+slapt-getrc.installationslint I
+soundcards.conf I
+startslint converted to /sbin/start and put in the inird by the script ../build/iso_dir
+syslog.conf I
+update-all I
+utils.sh I
+zzz-settings I

@@ -1,20 +1,19 @@
 #!/bin/sh
 [ "$(id -u)" -eq 0 ] && echo "Run this script as regular user." && exit
-[ "$(id -un)" = didier ] && [ "$(findmnt /data)" = "" ] && \
-echo "/data is not mounted." && exit
-[ "$#" -ne 1 ] && echo "usage: $0 [salix|slackware|slint]" && exit
-distribution="$1"
+[ "$#" -ne 1 ] && distribution=slint
+[ ! "$distribution" ] && distribution="$1"
 if [ ! "$distribution" = salix ] && [ ! "$distribution" = slackware ] && [ ! "$distribution" = slint ]; then
-	echo "$distribution= is not a supported distribution"
+	echo "$distribution is not a supported distribution"
 	exit
 fi
-cd .. 1>/dev/null ||  exit 1
 ROOTDIR=$(pwd)
-cd - 1>/dev/null || exit 1
 # SLINTDOCS should be a (copy of) a clone of:
 # https://github.com/DidierSpaier/slint-translations.git
+
 rm -rf "$ROOTDIR/slint-translations"
-cp -a /data/github/slint-translations "$ROOTDIR" || exit
+(cd "$ROOTDIR"
+git clone  https://github.com/DidierSpaier/slint-translations.git || exit
+)
 SLINTDOCS="$ROOTDIR/slint-translations"
 # We need the versions of the scripts functions and rc.S source of
 # the auto.pot and rc.S.pot files stored on Crowdin as sources

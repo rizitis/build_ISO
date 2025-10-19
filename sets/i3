@@ -8,7 +8,10 @@ jq
 libev
 notification-daemon
 pandoc-bin
+perl-AnyEvent
+perl-Canary-Stability
 perl-JSON-MaybeXS
+perl-Types-Serialiser
 perl-pango
 playerctl
 python-i3ipc
@@ -17,3 +20,4 @@ remind
 tcllib
 xcb-util-xrm
 xclip
+yajl

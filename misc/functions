@@ -28,7 +28,7 @@ export TEXTDOMAIN=auto
 . gettext.sh
 SLINTREPO=http://slackware.uk/slint/x86_64/slint-15.0
 SLACKREPO=http://slackware.uk/slackware/slackware64-15.0
-# Directory /patches of a Slackware repository
+# Directory /patches of a Slint repository
 PATCHESREPO=http://slackware.uk/slackware/slackware64-15.0/patches
 export SLINTVERSION=15.0
 ISOVERSION="$(cat /tmp/isoversion)"
@@ -44,7 +44,7 @@ GUIDLINUXGPT=0fc63daf-8483-4772-8e79-3d69d8477de4
 BIOSBOOTMINDRIVESIZE=3000000
 # Name of the key file written if user wants an encrypted drive
 KEYFILE=crypto_keyfile.bin
-# minimum size in gigabytes of a drive allowed to install Slackware in guided mode
+# minimum size in gigabytes of a drive allowed to install Slint in guided mode
 GCOUNT=30
 # minimum available room  in megabytes in a ESP in manual mode
 MINLINUXSIZE=$((MEGA*100))
@@ -63,7 +63,7 @@ INSTALL="/INSTALLER"
 # in auto partitioning mode
 # current size of the file system for which we allow to shrink it.
 MINPARTSIZE=2
-MINDRIVESIZE=$((GIGA*GCOUNT)) # Minimum free size in G to install Slackware
+MINDRIVESIZE=$((GIGA*GCOUNT)) # Minimum free size in G to install Slint
 MINFREESIZE=$((MINDRIVESIZE+(MINPARTSIZE*GIGA))) # Min free size for one partition beyond /
 # RESERVED is the list of directories which should not be mounted on separate
 # partitions.
@@ -94,7 +94,7 @@ to_lower() {
 clear_stdin() {
 	old_tty_settings=$(stty -g)
 	stty -icanon min 0 time 0
-	while read -r; do :; done 
+	while read -r; do :; done
 	stty "$old_tty_settings"
 }
 giveup() {
@@ -102,21 +102,21 @@ giveup() {
 	gettext "Press Enter to go back to the menu "
 	read -r  </dev/tty
 	clear
-	gettext "Welcome back to the menu of the Slackware installer.
+	gettext "Welcome back to the menu of the Slint installer.
 
 You may now type (without the quotes):
 
 'doc' to know the features and usage of the installer.
 'start' to start the installation.
 
-The installer can prepare the drive where Slackware will be installed,
+The installer can prepare the drive where Slint will be installed,
 creating the the needed partitions. If you prefer you can do it yourself
 using command line utilities available in the installer, then type 'start'
 when done. You can also leave the installer and use a tool like gparted
 to do that then start the installer again.
 
 We recommend that you type 'doc' first in this case, or if you want to
-encrypt the root Slackware partition.
+encrypt the root Slint partition.
 When you finish reading this menu will be displayed again."
 echo
 exit
@@ -142,7 +142,7 @@ trytoget() {
 	rm -f /tmp/failed
 	MYFILE="$(basename "$1")"
 	wget -q "$1" 2>>$INSTALL/errors
-	if [ ! -f "$MYFILE" ]; then 
+	if [ ! -f "$MYFILE" ]; then
 		echo yes > /tmp/failed
 	fi
 }
@@ -152,14 +152,14 @@ displayspkgerror() {
 	eval_gettext "Installation of \$1 failed for this reason:"
 	echo
 	cat "$PKGLISTS"/spkgerror
-	gettext "Therefore, Slackware installation is not possible."
+	gettext "Therefore, Slint installation is not possible."
 	echo
 }
 # Hints displayed when user types h for help.
 hintmode() {
 	# We are called by welcome
 	gettext "In manual partitioning mode you partition and format the drive
-where you want to install Slackware to your liking, using utilities it includes.
+where you want to install Slint to your liking, using utilities it includes.
 This gives you more choices of partitions layout and file systems but needs
 to be acquainted to Linux and the command line (but you may also have used
 a tool like gparted live before starting the installer, or from another system)."
@@ -168,7 +168,7 @@ a tool like gparted live before starting the installer, or from another system).
 partition layout and the file system."
 	echo
 	gettext "In both modes you will be given a chance to indicate existing
-partitions (not needed by Slackware) that you want to access from Slackware."
+partitions (not needed by Slint) that you want to access from Slint."
 	echo
 	echo && gettext "Press Enter to continue" && read -r && clear
 }
@@ -198,11 +198,11 @@ hintrootsize() {
 	ARG1=$1
 	ARG2=$2
 	eval_gettext "You may dedicate all the space available on the drive (\${ARG2}G) to the root
-Slackware partition, or make this partition smaller (at least \${ARG1}G) to reserve
+Slint partition, or make this partition smaller (at least \${ARG1}G) to reserve
 some space for a future use, like setting up a partition shared across OS or
-installing later another OS alongside Slackware.
+installing later another OS alongside Slint.
 
-To dedicate all the available space to the root Slackware partition, set its size to
+To dedicate all the available space to the root Slint partition, set its size to
 \${ARG2}G."
 echo && gettext "Press Enter to continue" && read -r && clear
 }
@@ -219,7 +219,7 @@ hintencryptornot() {
 	gettext "Encrypt a drive prevents theft of the data it contains in case of loss
 or theft of the drive itself or of the machine where it is installed.
 If you decide to encrypt it, you will need to type a so called \"passphrase\"
-to unlock it every time you boot Slackware.
+to unlock it every time you boot Slint.
 Be aware that if you forget the passphrase all data in the drive will be
 irrecoverably lost! So write it down carefully on a safe place.
 We will ask you to type the passphrase later using a \"us\" keyboard map."
@@ -243,7 +243,7 @@ echo " ' ! \" # $ %  & ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ \` { | } ~ "
 	echo && gettext "Press Enter to continue" && read -r && clear
 }
 hintloginmode() {
-	gettext "If you choose C (Console) Slackware will start in text mode, in a console
+	gettext "If you choose C (Console) Slint will start in text mode, in a console
 where you type commands at the prompt. It will first ask your login name then
 your password. After that you can type commands or start a graphical
 environment just typing: 'startx' without the quotes.
@@ -413,7 +413,7 @@ so all data it contains will be lost!"
 			echo
 			unset FORMAT
 			while [ ! "$(to_lower "$FORMAT")" = "yes" ] && [ ! "$(to_lower "$FORMAT")" = "no" ]; do
-				eval_gettext "Do you want to delete all data on \$NAME et re-format it?" 
+				eval_gettext "Do you want to delete all data on \$NAME et re-format it?"
 				echo
 				gettext "Type yes or no: " && clear_stdin && read -r FORMAT
 			done
@@ -474,15 +474,15 @@ then type start again."
 }
 initlocales() {
 	echo initlocales >>$INSTALL/log
-	if [ -f /tmp/.SlackwareInstallationLANG ]; then
-		LANG=$(cat /tmp/.SlackwareInstallationLANG)
+	if [ -f /tmp/.SlintInstallationLANG ]; then
+		LANG=$(cat /tmp/.SlintInstallationLANG)
 		ll_TT=${LANG%.*}
 	fi
 }
 probedrives() {
 	echo probedrives >>$INSTALL/log
-	# We want to know ASAP for each drive if/how Slackware can be installed on it
-	# 1. Dedicated to Slackware
+	# We want to know ASAP for each drive if/how Slint can be installed on it
+	# 1. Dedicated to Slint
 	# 2. On the free space on a drive
 	# The documentation tells the user how to allow dual booting
 	# Requirements:
@@ -533,7 +533,7 @@ probedrives() {
 	else
 		return
 	fi
-	# Now let's number the drives we allow to use to install Slackware in "auto" mode
+	# Now let's number the drives we allow to use to install Slint in "auto" mode
 	i=0
 	rm -f $INSTALL/numbereddrives
 	while read -r drive; do
@@ -601,7 +601,7 @@ probepartitions() {
 	|grep -e 'FSTYPE="ntfs"' -e 'FSTYPE="exfat"' -e 'FSTYPE="vfat"' \
 	|grep -v -e 'PARTTYPE="c12a7328-f81f-11d2-ba4b-00a0c93ec93b"' -e 'PARTTYPE="0xef"' \
 	|while read -r partition; do
-	
+
 		i=$((i+1))
 		echo "PARTNUM=\"$i\" $partition" >>$INSTALL/windowspartitions
 	done
@@ -666,9 +666,9 @@ probepartitions() {
 choosemanualorauto() {
 	echo choosemanualorauto >>$INSTALL/log
 	clear
-	gettext "The Slackware installer proposes installation options and let you choose
+	gettext "The Slint installer proposes installation options and let you choose
 what you prefer, through question/answer dialogues, then it installs and
-configure Slackware. After installation you may customize the system through
+configure Slint. After installation you may customize the system through
 simple commands listed in the included documentation."
 	echo
 	gettext "You can chose between a manual or auto partitioning."
@@ -705,7 +705,7 @@ checkinstallationmodes() {
 	# The BIOS boot partition (if needed) and the ESP should be on the
 	# same drive as the root partition, else we will not propose the root
 	# partition so that SLINT be portable if connected through USB and
-	# 
+	#
 	# In auto mode we just need a big enough drive
 	touch $INSTALL/driveswithbiosboot
 	[ "$AUTO" ] && [ ! "$FITFORAUTO" ] && backtomenu "$MSGNOSUITABLEDRIVE"
@@ -733,7 +733,7 @@ checkinstallationmodes() {
 					fi
 				done <$INSTALL/efipartitions
 			done < $INSTALL/rootpartitions
-			cp $INSTALL/rootpartitions.new $INSTALL/rootpartitions 
+			cp $INSTALL/rootpartitions.new $INSTALL/rootpartitions
 			[ ! $EFIROOTSAMEDRIVE ]  && backtomenu "$MSGMISFITROOTEFI"
 		fi
 		# In case of a GPT we require that a BIOS boot partition on the
@@ -762,7 +762,7 @@ checkinstallationmodes() {
 				echo "$rootpart" >> $INSTALL/rootpartitions.new
 			fi
 		done < $INSTALL/rootpartitions
-		if [ -f $INSTALL/rootpartitions.new ]; then 
+		if [ -f $INSTALL/rootpartitions.new ]; then
 			mv $INSTALL/rootpartitions.new $INSTALL/rootpartitions
 		else
 			[ ! "$BIOSBOOTROOTSAMEDRIVE" ] && backtomenu "$MSGMISFITROOTBIOSBOOT"
@@ -774,7 +774,7 @@ choosetargetdrive() {
 	echo choosetargetdrive >>$INSTALL/log
 	# First inform the user about his or her options.
 	# If a drive has a GPT and the installer booted in EFI mode, we propose to
-	# install Slackware in the biggest free space of a drive, if big enough.
+	# install Slint in the biggest free space of a drive, if big enough.
 	echo
 	if [ "$(wc -l $INSTALL/drives|cut -d" " -f1)" = "1" ]; then
 	# Only one drive is fit for installation in auto mode
@@ -783,12 +783,12 @@ choosetargetdrive() {
 		GSIZE=$((SIZE/GIGA))
 		echo "$SERIAL" >$INSTALL/serial
 		SHORTNAME=$(echo "$NAME"|sed s,/dev/,,)
-		gettext "Slackware can be installed on this drive:"
+		gettext "Slint can be installed on this drive:"
 		echo
 		VEND=$(echo "$VENDOR"|sed "s/[[:space:]]//g")
 		MOD=$(echo "$MODEL"|sed "s/[[:space:]]//g")
 		echo "$NAME $VEND $MOD (${GSIZE}G)"
-		gettext "To install Slackware on this drive we need to wipe all data in it"
+		gettext "To install Slint on this drive we need to wipe all data in it"
 		echo
 	else
 	# User can choose the target drive
@@ -797,7 +797,7 @@ choosetargetdrive() {
 		# available ones
 		NUMBEROFDRIVES=$(wc -l $INSTALL/drives|cut -d" " -f1)
 		while [ "$CHOSEN" = "no" ]; do
-			gettext "Slackware can be installed on one of the drives listed below."
+			gettext "Slint can be installed on one of the drives listed below."
 			echo
 			while read -r drive; do
 				echo "$drive" > $INSTALL/drive
@@ -808,7 +808,7 @@ choosetargetdrive() {
 				MOD=$(echo "$MODEL"|sed "s/[[:space:]]//g")
 				echo "$DRIVENUM $NAME $VEND $MOD (${GSIZE}G)"
 				printf "   "
-					gettext "To install Slackware on this drive we need to wipe all data in it"
+					gettext "To install Slint on this drive we need to wipe all data in it"
 					echo
 			done <$INSTALL/drives
 			echo
@@ -843,12 +843,12 @@ createbiosbootandefipartitions() {
 	ANSWER=""
 	echo
 	SIZEG=$((SIZE/GIGA))
-	gettext "Slackware would be installed on this drive:"
+	gettext "Slint would be installed on this drive:"
 	echo
 	echo "$NAME $VENDOR $MODEL SIZE: ${SIZEG}G"
 	echo
 	if [ "$LASTPARTPATH" ]; then
-		eval_gettext "To dedicate \$NAME, size \${SIZEG}G to Slackware we need to delete all data
+		eval_gettext "To dedicate \$NAME, size \${SIZEG}G to Slint we need to delete all data
 stored on this drive, including existing OS case occurring.
 Here are its current partitions:"
 		echo
@@ -856,7 +856,7 @@ Here are its current partitions:"
 		lsblk -lp -o name,size,fstype,type "$NAME"|grep -v disk|sed 's/TYPE$//;s/part$//'
 		echo
 		while [ ! "$(to_lower "$ANSWER")" = "yes" ] && [ ! "$(to_lower "$ANSWER")" = "no" ]; do
-			eval_gettext "Do you want to delete all data on \$NAME then install Slackware on it?"
+			eval_gettext "Do you want to delete all data on \$NAME then install Slint on it?"
 			echo
 			gettext "Type yes or no: " && clear_stdin && read -r ANSWER
 		done
@@ -865,7 +865,7 @@ Here are its current partitions:"
 	fi
 	else
 		while [ ! "$(to_lower "$ANSWER")" = "yes" ] && [ ! "$(to_lower "$ANSWER")" = "no" ]; do
-			gettext "Do you want to install Slackware on it?"
+			gettext "Do you want to install Slint on it?"
 			echo
 			gettext "Type yes or no: " && clear_stdin && read -r ANSWER
 		done
@@ -875,7 +875,7 @@ Here are its current partitions:"
 	fi
 	echo 'SERIAL=$(cat $INSTALL/serial)' >>$INSTALL/preparedrive
 	echo 'grep "SERIAL=\"$SERIAL\"" $INSTALL/drives >$INSTALL/drive' >>$INSTALL/preparedrive
-	echo '. $INSTALL/drive' >>$INSTALL/preparedrive 
+	echo '. $INSTALL/drive' >>$INSTALL/preparedrive
 	echo 'DRIVEPATH=$NAME' >>$INSTALL/preparedrive
 	echo 'sgdisk --zap-all $DRIVEPATH >>$INSTALL/log' >>$INSTALL/preparedrive
 	echo 'wipefs --all --force $DRIVEPATH >>$INSTALL/log' >>$INSTALL/preparedrive
@@ -897,7 +897,7 @@ Here are its current partitions:"
 createrootpartition() {
 	[ "$MANUAL" ] && return
 	echo drivetail >>$INSTALL/log
-	# We are called with number if the root Slackware partition and the available
+	# We are called with number if the root Slint partition and the available
 	# space at the end of the drive in bytes.
 	AVAILABLE=$(cat $INSTALL/available)
 	GAVAILABLE=$((AVAILABLE/GIGA))
@@ -908,12 +908,12 @@ createrootpartition() {
 		# used to add a partition after it...
 		GROOTSIZE=0
 		echo
-		eval_gettext "You can dedicate all the available space: \${GAVAILABLE}G to Slackware's root partition,
+		eval_gettext "You can dedicate all the available space: \${GAVAILABLE}G to Slint's root partition,
 or keep part of it for another usage.
-The size of the Slackware root partition should be between \${GCOUNT}G and \${GAVAILABLE}G."
+The size of the Slint root partition should be between \${GCOUNT}G and \${GAVAILABLE}G."
 		echo
 		while true; do
-			gettext "Size of the Slackware root partition (h for help): "
+			gettext "Size of the Slint root partition (h for help): "
 			clear_stdin
 			read -r ANSWER
 			GROOTSIZE=$(echo "$ANSWER"|sed "s/[ ]\{1,\}g//;s/[Gg]//;s/[.].*//")
@@ -975,7 +975,7 @@ createadditionalpartition() {
 	# Add a partition if requested.
 	# We are called by drivetail, that sets PARTNUM to its number and MREMAINING
 	# and GREMAINING as the sizes in megabytes and gigabytes of the remaining
-	# free space after the root Slackware partition.
+	# free space after the root Slint partition.
 	AVAILABLE=$(cat $INSTALL/available)
 	if [ "$AVAILABLE" -eq 0 ]; then
 		return
@@ -1044,7 +1044,7 @@ setroot() {
 	[ "$AUTO" ] && return
 	echo setroot >>$INSTALL/log
 	# We allow the user to choose which partitions to become the root or "/"
-	# Slackware partition. This partition will be formatted.
+	# Slint partition. This partition will be formatted.
 	# As the name of the partition can change if a drive is (dis)connected
 	# during installation we will refer to it by its partuuid, which won't
 	# change. We do not use the uuid as it is set only for formatted
@@ -1062,14 +1062,14 @@ setroot() {
 		echo
 		gettext "You have chosen the \"manual\" partitioning mode."
 		echo
-		gettext "We need to identify the root Slackware partition, to be mounted as \"/\".
+		gettext "We need to identify the root Slint partition, to be mounted as \"/\".
 We will later format this partition, which will erase its content."
 		echo
-		eval_gettext "We have found only one Linux partition big enough to install Slackware:
+		eval_gettext "We have found only one Linux partition big enough to install Slint:
 \${ROOTNAME}, size \${GSIZE}G."
 echo
 		while true; do
-			eval_gettext "Do you want to install Slackware on \$ROOTNAME?"
+			eval_gettext "Do you want to install Slint on \$ROOTNAME?"
 			echo
 			gettext "Please type yes to confirm or no to quit: "
 			clear_stdin
@@ -1133,7 +1133,7 @@ echo
 	echo
 	gettext "You have chosen the \"manual\" partitioning mode."
 	echo
-	gettext "We need to identify the root Slackware partition, to be mounted as \"/\".
+	gettext "We need to identify the root Slint partition, to be mounted as \"/\".
 We will later format this partition, which will erase its content."
 	echo
 	gettext "You can select the root partition among these:"
@@ -1329,14 +1329,14 @@ setefimanual() {
 	echo "$NAME" > $INSTALL/esppath
 }
 encryptornot() {
-	# I am unsure if we should allow encrypting the root Slackware partition
+	# I am unsure if we should allow encrypting the root Slint partition
 	# in all cases, but let's do so for now as the alternative would be to
 	# only allow that in case of auto partitioning of a dedicated drive
 	# which seems too restrictive.
 	# In auto partitioning mode if an additional partition has been set up
-	# encrypt it too. 
+	# encrypt it too.
 	echo encryptornot >>$INSTALL/log
-	if [ "$AUTO" ]; then 
+	if [ "$AUTO" ]; then
 		SERIAL=$(cat $INSTALL/serial)
 		grep "SERIAL=\"$SERIAL\"" $INSTALL/drives > $INSTALL/drive
 		. $INSTALL/drive
@@ -1347,9 +1347,9 @@ encryptornot() {
 	fi
 	echo
 	KEYMAP=$(cut -d. -f1 /tmp/Pkeymap)
-	eval_gettext  "The root Slackware partition can be encrypted to prevent data
-steal in case of loss or theft of the machine or the drive where Slackware is
-installed. Then you will type a so-called \"passphrase\" to unlock the Slackware
+	eval_gettext  "The root Slint partition can be encrypted to prevent data
+steal in case of loss or theft of the machine or the drive where Slint is
+installed. Then you will type a so-called \"passphrase\" to unlock the Slint
 partition, giving access to the boot menu. We will record this passphrase"
 	if [ ! "$KEYMAP" = "us" ]; then
 		eval_gettext " using a \"us\" keyboard map"
@@ -1398,7 +1398,7 @@ confirm() {
 		echo
 		SIZEG=$((SIZE/GIGA))
 		eval_gettext "We are ready to do what you requested:
-Install Slackware on this drive:
+Install Slint on this drive:
 \$NAME \$VEND \$MOD size \${SIZEG}G"
 		echo
 		gettext "All data previously stored on it will be deleted."
@@ -1408,7 +1408,7 @@ Install Slackware on this drive:
 		SIZEG=$((SIZE/GIGA))
 		FSTYPE=$(cat $INSTALL/rootfstype)
 		eval_gettext "We are ready to do what you requested:
-Install Slackware on this partition:
+Install Slint on this partition:
 \$NAME, size \${SIZEG}G, file system \$FSTYPE
 All data previously stored on it will be deleted but the contents of
 other partitions on \$PKNAME will be preserved."
@@ -1421,7 +1421,7 @@ other partitions on \$PKNAME will be preserved."
 	if [ "$AUTO" ]; then
 		echo "btrfs" > $INSTALL/rootfstype
 		ROOTSIZE=$(cat $INSTALL/rootsize)
-		eval_gettext "The Slackware system partition will have a size of \${ROOTSIZE}G."
+		eval_gettext "The Slint system partition will have a size of \${ROOTSIZE}G."
 		echo
 		if [ -f $INSTALL/addedpartsize ]; then
 			ADDEDPARTSIZE=$(cat $INSTALL/addedpartsize)
@@ -1459,7 +1459,7 @@ other partitions on \$PKNAME will be preserved."
 					echo "linux $(cat $INSTALL/rootpartpath) (${GSIZE}G) / $(cat $INSTALL/rootfstype) formatted"
 				else
 					FORMATTED=""
-					[ "$FORMATME" = "yes" ] && FORMATTED="formatted"  
+					[ "$FORMATME" = "yes" ] && FORMATTED="formatted"
 					echo "$KIND $NAME (${GSIZE}G) $MOUNTPOINT $FSTYPE $FORMATTED"
 				fi
 			done < $INSTALL/"${KIND}"usedpart
@@ -1485,7 +1485,7 @@ else you will go back to the greeting screen of the installer."
 		clear_stdin
 		read -r ANSWER
 		case $(to_lower "$ANSWER") in
-			yes) 
+			yes)
 				echo "Version of ISO used for installation: $ISOVERSION"  >>$INSTALL/log
 				break 2;;
 			no) backtomenu "$(gettext "You can redo a configuration.")";;
@@ -1497,7 +1497,7 @@ preparethedrive() {
 	[ "$MANUAL" ] && return
 	echo preparethedrive >>$INSTALL/log
 	echo
-	eval_gettext "We prepare \$DRIVEPATH to install Slackware..."
+	eval_gettext "We prepare \$DRIVEPATH to install Slint..."
 	echo
 	. $INSTALL/preparedrive
 }
@@ -1583,7 +1583,7 @@ reason we will now display the typed characters using an \"us\" keyboard map.
 		break
 	done
 	echo
-	gettext "Encrypting the root Slackware partition..."
+	gettext "Encrypting the root Slint partition..."
 	echo
 	# creating /run/cryptsetup avoid this harmless warning when using luks2
 	# WARNING: locking directory /run/cryptsetup is missing!
@@ -1773,7 +1773,7 @@ fstab() {
 		echo "UUID=$UUID /swap btrfs subvol=@swap,compress=zstd:3,discard=async,noatime 0 0" >>$FSTAB
 		if [ -f $INSTALL/addedpartname ]; then
 			ADDEDPARTPATH=$(cat $INSTALL/addedpartpath)
-			UUID=$(blkid -s UUID -o value "$ADDEDPARTPATH") 
+			UUID=$(blkid -s UUID -o value "$ADDEDPARTPATH")
 			echo "# Initially $ADDEDPARTPATH" >>$FSTAB
 			echo "UUID=$UUID /$ADDEDPARTNAME btrfs compress=zstd:3,discard=async,noatime 0 0" >>$FSTAB
 			mkdir -p $SLINT/"$ADDEDPARTNAME"
@@ -1898,7 +1898,7 @@ createregularuser() {
 	ADDGROUPS="audio,braille,cdrom,floppy,input,lp,netdev,plugdev,polkitd,power,scanner,video,wheel"
 	gettext "We will now set up an account for a regular user.
 Other user accounts can be set up after installation.
-We need to know under which name this user will log in to access Slackware."
+We need to know under which name this user will log in to access Slint."
 	echo
 # requirements for a portable user name: portable file name not beginning qith a <hyphen-minus>:
 # https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_437
@@ -1926,7 +1926,7 @@ from 0 to 9, '_' or '-'"; echo; continue;;
 brlttyornot() {
 	echo brlttyornot >>$INSTALL/log
 	echo
-	gettext "Blind users can run Slackware with a Braille device or a screen reader."
+	gettext "Blind users can run Slint with a Braille device or a screen reader."
 	echo
 	while true; do
 		gettext "Will you use a Braille device? Please answer yes or no: "
@@ -1945,7 +1945,13 @@ startupmode() {
 #		sed "/:initdefault:/s/.*/id:3:initdefault:/" $SLINT/etc/inittab > bof
 #		mv bof $SLINT/etc/inittab
 #		return
-#	fi		
+#	fi
+	# No need for a graphical login manager if no desktop is installed.
+	if [ "$(cat /tmp/set)"  = fullslint ]; then
+		sed "/:initdefault:/s/.*/id:3:initdefault:/" $SLINT/etc/inittab > bof
+		mv bof $SLINT/etc/inittab
+		return
+	fi
 	echo startupmode >>$INSTALL/log
 	# Choose the startup mode
 	gettext "Do you want to start the system in a console or in graphical mode?"
@@ -1971,7 +1977,7 @@ defaultlocale() {
 	if echo "$LOCALES"|grep -q " $LANG " && [ ! "$LANG" = "en_US.utf8" ]; then
 		chroot $SLINT /usr/sbin/localesetup "$LANG" 1>>$INSTALL/log
     else
-		gettext "In the next dialog, you will choose the language for your Slackware System."
+		gettext "In the next dialog, you will choose the language for your Slint System."
 		echo
 		gettext "Press Enter to continue:"
 		chroot $SLINT /usr/sbin/localesetup
@@ -2328,7 +2334,7 @@ settimezone() {
 			esac
 		done
 	fi
-	if [ ! "$ACCEPTEDTZ" ];then 
+	if [ ! "$ACCEPTEDTZ" ];then
 		gettext "You can set the time zone now, or accept the default value (UTC) and modify
 this setting after installation."
 		echo
@@ -2403,7 +2409,7 @@ setlocales () {
 		fy*) lo="";asp="fy";; # Frisian (Frysk)
 		ga*) lo="";asp="ga";; # Irish (Gaeilge)
 		gd*) lo="";asp="gd";; # Scottish Gaelic (Gàidhlig)
-		gl*) lo="gl";asp="gl";; # Galician (Galego) 
+		gl*) lo="gl";asp="gl";; # Galician (Galego)
 		grc*) lo="";asp=grc;; # Ancient Greek (but no matching locale in glibc)
 		gu*) lo="gu";asp="gu";; # Gujarati (ગુજરાતી)
 		gv*) lo="";asp="gv";; # Manx Gaelic
@@ -2500,10 +2506,10 @@ install() {
 	echo install >>$INSTALL/log
 	echo install >>$PKGLISTS/loginstall
 	echo download >>$PKGLISTS/logdownload
-	# We assume that all packages in the ISO come from the Slackware repository or
-	# or the Slackware64-15.0 repository
+	# We assume that all packages in the ISO come from the Slint repository or
+	# or the Slint64-15.0 repository
 	# We will install packages from the ISO unless:
-	# 1. We find a package with a different full name in the Slackware repo and the
+	# 1. We find a package with a different full name in the Slint repo and the
 	# package name in the ISO ends in slint.txz
 	# 2 We find a package with a different full name in the patches sub-directory
 	# of the Slackwkare repo and the package name in the ISO does not end in slint.txz
@@ -2511,9 +2517,9 @@ install() {
 	# the file CHECKSUMS.md5 in the patches sub-directory of the Slacwkare repo
 	# the file CHECKSUMS.md5 of the Slacwkare repo
 	# the file CHECKSUM.md5 of the ISO
-	
+
 	# We do do not handle removals from the repositories since the ISO was built,
-	# nor packages migrated from Slackware to Slackware since then.
+	# nor packages migrated from Slint to Slint since then.
 	# Packages are installed using spkg. If installed a package fails, abort the
 	# installation.
 	unset CONNECTED
@@ -2531,7 +2537,7 @@ install() {
 	ROOT=/SLINT
 	export ROOT
 	export SLAPT_NO_SSL_VERIFYPEER
-	gettext "Configuring slapt-get to fetch packages from a remote repository..." && echo  
+	gettext "Configuring slapt-get to fetch packages from a remote repository..." && echo
 	CONFIGFILE="slapt-getrc.installation$(cat /tmp/distro)"
 	slapt-get --add-keys -c /"$CONFIGFILE" 1>/tmp/slapt-get_download 2>/slapt-get_errors
 	slapt-get -u -c /"$CONFIGFILE" 1>>/tmp/slapt-get_download 2>>/slapt-get_errors
@@ -2696,6 +2702,7 @@ press Enter to accept the default name \"slint\"."
 		sh /usr/sbin/setup/bp2cf -u -p "$brltty" -f $SLINT/etc/brltty.conf
 	fi
 	NBSESSIONS=$(find "$SLINT"/usr/share/xsessions -name "*.desktop"|grep -c -v -e safe -e xwmconfig)
+	[ "$NBSESSIONS" -eq 0 ] && rm -f $SLINT/home/"$LOGIN"/.xinitrc
 	if [ "$NBSESSIONS" -gt 1 ]; then
 		# Set the graphical session are several are available
 		for filename in "$SLINT"/usr/share/xsessions/*; do
@@ -2725,7 +2732,7 @@ press Enter to accept the default name \"slint\"."
 		echo
 	fi
 	if [ "$NBSESSIONS" -eq 1 ]; then
-		# Only one DE has been installed, set session accordingly		
+		# Only one DE has been installed, set session accordingly
 		THESESSION=$(find "$SLINT"/usr/share/xsessions -name "*.desktop"|grep -v -e safe -e xwmconfig|sed 's#.*/##')
 		session=${THESESSION%.*}
 	fi
@@ -2743,7 +2750,7 @@ press Enter to accept the default name \"slint\"."
 		# This is for startx
 		cp $SLINT/etc/X11/xinit/xinitrc.$xinit $SLINT/home/"$LOGIN"/.xinitrc
 		cp $SLINT/etc/X11/xinit/xinitrc.$xinit $SLINT/home/"$LOGIN"/.xsession
-	
+
 		# We need to run setxkbmap just after having started X, so that $DISPLAY
 		# be set. But in some cases that is easier to do live than when building
 		# the window manager or desktop.
@@ -2767,7 +2774,7 @@ press Enter to accept the default name \"slint\"."
 	chroot $SLINT chmod 0755 /usr/sbin/update-all
 	chroot $SLINT /sbin/update-all
 	# in auto partitioning mode an ESP is always created. In manual partitioning mode if an ESP
-	# exists in the same drive as the root partition its path is set in $INSTALL/path 
+	# exists in the same drive as the root partition its path is set in $INSTALL/path
 	if [ "$AUTO" ] || [ -f $INSTALL/esppath ]; then
 		mkdir -p $SLINT/boot/efi
 		# grub will need to access the ESP
@@ -2787,7 +2794,7 @@ press Enter to accept the default name \"slint\"."
 		chmod 755 $SLINT/etc/rc.d/rc.4.local
 	fi
 	# We assume that a user needing speech during intallation will need to use a
-	# screen reader to log in in lightdm 
+	# screen reader to log in in lightdm
 	if [ ! -f /tmp/noespeakup ] && [ -f $SLINT/usr/share/glib-2.0/schemas/10.slint-appearance.gschema.override ]; then
 		sed 's#^screen-reader=false#screen-reader=true#' $SLINT/usr/share/glib-2.0/schemas/10.slint-appearance.gschema.override > bof
 		mv bof $SLINT/usr/share/glib-2.0/schemas/10.slint-appearance.gschema.override
@@ -2838,7 +2845,7 @@ press Enter to accept the default name \"darkstar\"."
 	chroot $SLINT chmod 0755 /usr/sbin/update-all
 	chroot $SLINT /sbin/update-all
 	# in auto partitioning mode an ESP is always created. In manual partitioning mode if an ESP
-	# exists in the same drive as the root partition its path is set in $INSTALL/path 
+	# exists in the same drive as the root partition its path is set in $INSTALL/path
 	if [ "$AUTO" ] || [ -f $INSTALL/esppath ]; then
 		mkdir -p $SLINT/boot/efi
 		# grub will need to access the ESP
@@ -2916,7 +2923,7 @@ press Enter to accept the default name \"darkstar\"."
 		echo
 	fi
 	if [ "$NBSESSIONS" -eq 1 ]; then
-		# Only one DE has been installed, set session accordingly		
+		# Only one DE has been installed, set session accordingly
 		THESESSION=$(find "$SLINT"/usr/share/xsessions -name "*.desktop"|grep -v -e safe -e xwmconfig|sed 's#.*/##')
 		session=${THESESSION%.*}
 	fi
@@ -2934,7 +2941,7 @@ press Enter to accept the default name \"darkstar\"."
 		# This is for startx
 		cp $SLINT/etc/X11/xinit/xinitrc.$xinit $SLINT/home/"$LOGIN"/.xinitrc
 		cp $SLINT/etc/X11/xinit/xinitrc.$xinit $SLINT/home/"$LOGIN"/.xsession
-	
+
 		# We need to run setxkbmap just after having started X, so that $DISPLAY
 		# be set. But in some cases that is easier to do live than when building
 		# the window manager or desktop.
@@ -2958,19 +2965,19 @@ press Enter to accept the default name \"darkstar\"."
 	# enable btrfsmaintenance as long as the script doinst.sh does not do it during installation of
 	# btrfsmaintenance. And if it does, this won't hurt
 	chroot /SLINT usr/sbin/btrfsmaintenance-refresh-cron.sh 1>/zzz_btrfs.log 2>/zzz_btrfserr.log
-	# thinkfan is shipped in Slackware but lacks /etc/thinkfan.conf.
+	# thinkfan is shipped in Slint but lacks /etc/thinkfan.conf.
 	# to avoid an error message at startup, make /etc/rc.d/rc.thinkfan 644
 	[ -x "$SLINT"/etc/rc.d/rc.thinkfan ] && chmod 644 "$SLINT"/etc/rc.d/rc.thinkfan
 	# in auto partitioning mode an ESP is always created. In manual partitioning mode if an ESP
-	# exists in the same drive as the root partition its path is set in $INSTALL/path 
+	# exists in the same drive as the root partition its path is set in $INSTALL/path
 	if [ "$AUTO" ] || [ -f $INSTALL/esppath ]; then
 		mkdir -p $SLINT/boot/efi
 		# grub will need to access the ESP
 		chroot $SLINT mount /boot/efi
 		mkdir -p $SLINT/boot/efi/EFI/BOOT
 	fi
-    # Show Slackware Linux ... in the GRUB boot entries
-    echo  'GRUB_DISTRIBUTOR=Slackware' >> $SLINT/etc/default/grub
+    # Show Slint Linux ... in the GRUB boot entries
+    echo  'GRUB_DISTRIBUTOR=Slint' >> $SLINT/etc/default/grub
 }
 
 mountefivarsandmovehome(){
@@ -2984,7 +2991,7 @@ mountefivarsandmovehome(){
 }
 bootingsetup() {
 	echo bootingsetup >>$INSTALL/log
-	if [ "$AUTO" ]; then 
+	if [ "$AUTO" ]; then
 		SERIAL=$(cat $INSTALL/serial)
 		grep "SERIAL=\"$SERIAL\"" $INSTALL/drives > $INSTALL/drive
 		. $INSTALL/drive
@@ -3046,7 +3053,7 @@ bootingsetup() {
 	gettext "Building the GRUB boot menu..."
 	echo
 	chroot $SLINT /usr/sbin/grub-mkconfig -o /boot/grub/grub.cfg 1>>$INSTALL/log 2>>$INSTALL/errors
-	# Do not clutter Slackware's boot GRUB with symlinks
+	# Do not clutter Slint's boot GRUB with symlinks
 	if [ -f /tmp/set ] && grep -q slackware /tmp/set; then
 		(cd $SLINT/boot || exit
 		find . -type l -maxdepth 1 -exec rm '{}' +
@@ -3055,7 +3062,7 @@ bootingsetup() {
 }
 byebye() {
 echo byebye >>$INSTALL/log
-	# Remove the huge slapt-get database only used during installation. 
+	# Remove the huge slapt-get database only used during installation.
 	rm -rf "$SLINT/var/slapt-get"
 	echo "store in $SLINT/var/log/$INSTALL stuff useful to investigate a booting issue..." >>$INSTALL/log
 	echo "running alsa-info.sh" >>$INSTALL/log
@@ -3068,7 +3075,7 @@ echo byebye >>$INSTALL/log
 	cp -r /tmp $SLINT/var/log/$INSTALL/
 	echo "remove packages stored in $PKGLISTS" >>$INSTALL/log
 	rm -f "$PKGLISTS"/*.txz
-	mv $PKGLISTS $SLINT/var/log/$INSTALL/ 
+	mv $PKGLISTS $SLINT/var/log/$INSTALL/
 	echo "copying installation scripts in $SLINT/var/log/$INSTALL/installation-scripts"  >>$INSTALL/log
 	mkdir -p $SLINT/var/log/$INSTALL/installation-scripts
 	cp  -f /sbin/functions /sbin/start $SLINT/var/log/$INSTALL/installation-scripts/
@@ -3077,11 +3084,11 @@ echo byebye >>$INSTALL/log
 	tar --use-compress-program xz -cf INSTALLER.xz INSTALLER
 	)
 	echo
-	gettext "Installation and initial configuration of Slackware are complete.
+	gettext "Installation and initial configuration of Slint are complete.
 If you want a preview of the boot menu displayed after rebooting, type now:
 chroot /SLINT list_boot_entries
 To exit press q (not Alt+F4 in this context) then y.
-To quit the installer and start your new Slackware remove the installation media
+To quit the installer and start your new Slint remove the installation media
 then type 'reboot' or press Ctrl+Alt+Del."
 	echo
 	echo

@@ -1,52 +1,63 @@
 #!/bin/sh
-cd .. 1>/dev/null ||  exit 1
+#cd .. || exit
 ROOTDIR=$(pwd)
 export ROOTDIR
-cd - 1>/dev/null || exit 1
-PKGNAM=slint-installer
-export PKGNAM
-KVER=6.12.47
+#cd -
+# version of the kernel to be include in the ISO
+KVER=6.12.51
 export KVER
-SLACKROOT="/data/repos/slackware-15.0"
-export SLACKROOT
-SLACKREPO="$SLACKROOT"/slackware64
-export SLACKREPO
-PATCHES="$SLACKROOT"/patches/packages
-export PATCHES
-SLINTROOT=/repo/x86_64/slint-15.0
-export SLINTROOT
-SLINTREPO="$SLINTROOT"/slint
-export SLINTREPO
-ARCH="$(uname -m)"
-export ARCH
-SOURCE="/repo/x86_64/slint-15.0/source"
-export SOURCE
-ISOVERSION="15.0-8"
+# version of the ISO
+ISOVERSION="15.0-11"
 export ISOVERSION
-ISOLABEL="slint$ISOVERSION"
-export ISOLABEL
 SLINTVERSION="15.0"
 export SLINTVERSION
 SLACKVERSION="15.0"
 export SLACKVERSION
-REGULARUSER="$(stat -c %U "$(pwd)")"
+# Remote Slackware repository
+SLACKWAREREMOTE="slackware.uk/salix/x86_64/slackware-15.0"
+export SLACKWAREREMOTE
+# Remote Slint repository
+SLINTREMOTE="slackware.uk/slint/x86_64/slint-15.0"
+export SLINTREMOTE
+SLAPTGETISO="$ROOTDIR/build/slapt-getrc.isoslint"
+export SLAPTGETISO
+ARCH="$(uname -m)"
+export ARCH
+ISOLABEL="slint$ISOVERSION"
+export ISOLABEL
+# Owner of the repository hosting $ROOTDIR
+REGULARUSER="$(stat -c %U "$ROOTDIR")"
 export REGULARUSER
 DEST="$ROOTDIR"/initrd-tree
 export DEST
-ISODIR=/home/didier/iso64
+ISODIR="$ROOTDIR"/isodir
 export ISODIR
 SCRIPTS="$ROOTDIR"/misc
 export SCRIPTS
 DATESTAMP="$(date -u +%Y%m%d)"
 export DATESTAMP
-PATHTOISO=/repo/x86_64/slint-15.0/iso/slint64-"${ISOVERSION}".iso
+PATHTOISO="$ROOTDIR"/slint64-"${ISOVERSION}".iso
 export PATHTOISO
 INSTALLERVERSION=15.0
 export INSTALLERVERSION
 SLINTDOCS="$ROOTDIR/slint-translations"
 export SLINTDOCS
-export LANG=C
-SETS="bootstrapslint aaa_base fullslint wpa_supplicant-nogui i3 lxqt mate"
+LANG=C
+export LANG
+SETS="bootstrapslint
+aaa_base
+installer
+fullslint
+wpa_supplicant-nogui
+i3
+lxqt
+mate
+libreoffice_l10n
+aspell-words-lists
+some_mbrola_voices
+some_flite_voices"
 export SETS
+MINSETS=$SETS
+export MINSETS
 DISTRIBUTION=slint
 export DISTRIBUTION

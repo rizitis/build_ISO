@@ -1,0 +1,10 @@
+#!/bin/sh
+#. ./set_variables_slint
+mkdir -p "$SLACKROOT"
+rsync -v --progress -aH \
+--include-from="$ROOTDIR"/build/included-from-slackware64-15.0 \
+--exclude-from="$ROOTDIR"/build/excluded-from-slackware64-15.0 \
+--partial --append-verify \
+--delete-excluded \
+--prune-empty-dirs \
+rsync://"$SLACKWAREREMOTE/" "$SLACKROOT"  2>&1|tee thelog

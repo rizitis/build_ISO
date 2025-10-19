@@ -1,0 +1,26 @@
+#!/bin/sh
+# Check that all needed packages will be included in the ISO
+# As is, this script works only for building a Slint ISO, not a Salix or Slackware ISO
+# One more thing to put in the TODO list...
+distribution="$1"
+[ ! $distribution ] && distribution="slint"
+if [ "$distribution" = salix ] || [ "$distribution" = slackware ]; then
+	echo "$distribution is not handled by this script yet."
+	exit
+fi
+. ./set_variables_"$distribution"
+rm -f missing_packages
+pkgs=$(find "$SLINTROOT"/slint  "$SLINTROOT"/slint/mate "$SLINTROOT/"slint/lxqt -mindepth 1 -maxdepth 1 -name "*.txz"|sed 's#.*/##;s#-[^-]*-[^-]*-[^-]*$##')
+rm -f "$ROOTDIR"/sets/allsets_"$distribution"
+MYSETS=$(echo "$SETS"|sed 's# #\n#g')
+echo "$MYSETS"|while read SET; do
+	cat "$ROOTDIR"/sets/"$SET" >> "$ROOTDIR"/sets/allsets_"$distribution"
+done
+exit
+echo "$pkgs"|while read i; do
+	if ! grep -q "^${i}$" "$ROOTDIR"/sets/allsets_"$distribution"; then
+		echo "$i is missing."
+		echo "$i is missing" >> missing_packages
+
+	fi
+done
