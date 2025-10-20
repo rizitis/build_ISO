@@ -10,8 +10,8 @@ For the impatients, to build a Slint ISO, do this:
    We will name this directory $SLINTROOT
 
 Before you begin, there are a few requirements:
-- At least 6G of space on disk should be available
-- The host should be a 64bit Linux system
+- At least 6G of space on disk should be available.
+- The host should be a 64bit Linux system.
 - The packages slapt-get and spkg should be installed.
   slapt-get is installed by default in Salix, Slackel and Slint.
   For Slackware et derivatives, a SlackBuild is available in
@@ -21,7 +21,7 @@ Before you begin, there are a few requirements:
   https://github.com/gapan/spkg
 - Are also needed the usual POSIX/Linux utilities, git and a good enough
   Internet link to clone and fetch packages from remote repositories.
-- The signature CHECKSUMS.md5.gz.ass at the root of the ISO should be created
+- The signature CHECKSUMS.md5.gz.asc at the root of the ISO should be created
   by providing a passphrase when asked and the associated GPG_KEY stored
   somewhere to allow verification, like in the directory storing the ISO.
 - sudo should be configured.
