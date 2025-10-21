@@ -1,5 +1,5 @@
 WARNING: right now instructions below only work in a Slint host.
-Adaptations to a Salix or Slackware host wil be done later.
+Adaptations to a Salix or Slackware host will be done later.
 
 For the impatients, to build a Slint ISO, do this:
 
