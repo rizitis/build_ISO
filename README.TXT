@@ -15,7 +15,7 @@ Before you begin, there are a few requirements:
 - The packages slapt-get and spkg should be installed.
   slapt-get is installed by default in Salix, Slackel and Slint.
   For Slackware et derivatives, a SlackBuild is available in
-  https://slackbuilds.org  and she upstream repository is
+  https://slackbuilds.org  and the upstream repository is
   https://github.com/jaos/slapt-get/
   spkg is installed by default in Salix and Slint. The upstream repository is
   https://github.com/gapan/spkg
