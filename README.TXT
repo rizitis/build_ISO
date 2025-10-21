@@ -1,3 +1,6 @@
+WARNING: right now instructions below only work in a Slint host.
+Adaptations to a Salix or Slackware host wil be done later.
+
 For the impatients, to build a Slint ISO, do this:
 
 1. (Create if need be then) cd to a directory owned by a regular user, here
