@@ -28,7 +28,7 @@
 # <filename>.iso The ISO file written using this scripts intended to install Slint
 #
 press_enter_to_continue() {
-	if [ "$#" -eq 1 ] then 
+	if [ "$#" -eq 1 ]; then 
 		echo "$1"
 	else
 		printf "Press Enter to continue..."
