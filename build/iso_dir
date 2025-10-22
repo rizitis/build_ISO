@@ -83,7 +83,7 @@ echo "$DATESTAMP" > "$ISODIR"/DateBuilt
 rm -rf "$ISODIR"/boot/grub
 mkdir -p "$ISODIR"/boot/grub
 cp "$ROOTDIR"/grub/grub"${distribution}".cfg "$ISODIR"/boot/grub/grub.cfg
-KVER="$(find slint -name kernel-[[:digit:]]*txz|sed 's/.*-\([^-]*\)-[^-]*-[^-]*$/\1/')"
+KVER="$(find "$ISODIR"/slint -name kernel-[[:digit:]]*txz|sed 's/.*-\([^-]*\)-[^-]*-[^-]*$/\1/')"
 tar -xf "$ISODIR"/slint/kernel-"$KVER"*txz boot/vmlinuz-"$KVER"
 mv boot/vmlinuz-"$KVER" "$ISODIR"/linux
 (cd "$ISODIR" || exit 1
