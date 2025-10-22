@@ -44,17 +44,17 @@ if [ ! -x /usr/sbin/slapt-get ]; then
 fi
 if [ ! -x /sbin/spkg ]; then
 	echo "spkg is needed to build the ISO."
-	echo "You can get intsall this package:"
+	echo "You can get install this package:"
 	echo "https://slackware.uk/slint/x86_64/slint-15.0/slint/spkg-1.6-x86_64-2slint.txz"
 	exit
 fi 
 # This directory should be owned by a regular user
 [ "$REGULARUSER" = root ] && echo "Do not run this script in a directory owned by root!" && exit
 . build/set_variables_slint
-press_enter_to_continue "We need to put 10G of files in this directory. if that's OK press Enter else press ctrl-C."
+press_enter_to_continue "We need to put 10G of files in this directory. If that's OK press Enter else press ctrl-C."
 # In the file build/set_variables_slint, update the kernel version KVER and ISOVERSION if need be
-echo "The ISO VERSION ISOVERSION=$ISOVERSION as sourced from ./set_variables_slint."
-press_enter_to_continue "If that's OK press Enter, else press ctrl-C and update them."
+echo "The ISO bersion is ISOVERSION=$ISOVERSION."
+press_enter_to_continue "If that's OK press Enter, else press ctrl-C and update it in ./set_variables_slint."
 echo "Get the latest versions of scripts used during installation..."
 sh build/get_scripts slint
 echo
