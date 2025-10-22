@@ -12,7 +12,7 @@ if [ ! "$(id -u)" -eq 0 ]; then
   exit
 fi
 # Get the initrd from Slackware64-15.0 from a remote Slackware mirror, then unpack it.
-wget https://slackware.uk/slackware/slackware64-15.0/EFI/BOOT/initrd.img -O "$ROOTDIR"/initrd.img
+wget -q https://slackware.uk/slackware/slackware64-15.0/EFI/BOOT/initrd.img -O "$ROOTDIR"/initrd.img
 USER=$(stat -c %U .)
 rm -rf  "$ROOTDIR"/initrd-tree
 mkdir "$ROOTDIR"/initrd-tree
@@ -38,7 +38,12 @@ spkg -i -qq --root "$DEST" "$ISODIR"/slint/zd1211-firmware*txz
 spkg -i -qq --root "$DEST" "$ISODIR"/slint/b43-firmware*txz
 spkg -i -qq --root "$DEST" "$ISODIR"/slint/b43-fwcutter*txz
 spkg -i -qq --root "$DEST" "$ISODIR"/slint/gettext-0*t?z
-spkg -i -qq --root "$DEST" "$ISODIR"/slint/brltty-installer*t?z
+# We do not care for the messages and warnings insralling brltty-installer like:
+# brltty-genkey: key generated
+# chgrp: cannot access 'etc/brlapi.key': No such file or directory
+# chmod: cannot access 'etc/brlapi.key': No such file or directory
+# brltty-mkuser: unprivileged user not configured - use -U (user) to specify
+spkg -i -qq --root "$DEST" "$ISODIR"/slint/brltty-installer*t?z 1>/dev/null 2>/dev/null
 spkg -i -qq --root "$DEST" "$ISODIR"/slint/slint-doc-installer*t?z
 spkg -i -qq --root "$DEST" "$ISODIR"/slint/espeakup-installer*t?z
 spkg -i -qq --root "$DEST" "$ISODIR"/slint/espeak-ng-installer*t?z

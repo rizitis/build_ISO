@@ -39,14 +39,14 @@ for SET in $MINSETS; do
 			RET="$?"
 			if [ $RET = 1 ]; then
 				echo "Download of $i failed again, giving up."
-				WESHOULDEXIT=
+				WESHOULDEXIT=yes
 				exit
 			fi
 		fi
 			PKGDOWNLOADED=$(find /var/slapt-get|grep txz)
 			echo moving "$PKGDOWNLOADED" in "$ISODIR"/slint
 			mv "$PKGDOWNLOADED" "$ISODIR"/slint
-		[ "$WESHOULDEXIT" ] = yes ] && exit
+		[ "$WESHOULDEXIT" ] = yes && exit
 	done < "$ROOTDIR"/sets/"$SET" 2>>/tmp/errors_from_populate_iso.sh
 done
 # else
@@ -83,6 +83,7 @@ echo "$DATESTAMP" > "$ISODIR"/DateBuilt
 rm -rf "$ISODIR"/boot/grub
 mkdir -p "$ISODIR"/boot/grub
 cp "$ROOTDIR"/grub/grub"${distribution}".cfg "$ISODIR"/boot/grub/grub.cfg
+KVER="$(find slint -name kernel-[[:digit:]]*txz|sed 's/.*-\([^-]*\)-[^-]*-[^-]*$/\1/')"
 tar -xf "$ISODIR"/slint/kernel-"$KVER"*txz boot/vmlinuz-"$KVER"
 mv boot/vmlinuz-"$KVER" "$ISODIR"/linux
 (cd "$ISODIR" || exit 1

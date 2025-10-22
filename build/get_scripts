@@ -12,7 +12,12 @@ ROOTDIR=$(pwd)
 
 rm -rf "$ROOTDIR/slint-translations"
 (cd "$ROOTDIR"
-git clone  https://github.com/DidierSpaier/slint-translations.git || exit
+rm -f main.zip*
+rm -f slint-translations-main
+wget -q https://github.com/DidierSpaier/slint-translations/archive/refs/heads/main.zip
+unzip -qq main.zip
+mv slint-translations-main slint-translations || exit
+rm -f main.zip
 )
 SLINTDOCS="$ROOTDIR/slint-translations"
 # We need the versions of the scripts functions and rc.S source of

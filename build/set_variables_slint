@@ -3,9 +3,6 @@
 ROOTDIR=$(pwd)
 export ROOTDIR
 #cd -
-# version of the kernel to be include in the ISO
-KVER=6.12.51
-export KVER
 # version of the ISO
 ISOVERSION="15.0-11"
 export ISOVERSION

@@ -13,6 +13,7 @@
 /sbin/SeTlocales
 /sbin/functions
 /sbin/zzz-settings
+/sbin/zzz-settingsslack
 /sbin/probe_sound_cards
 /sbin/nmconfig
 /sbin/update-all
@@ -20,6 +21,8 @@
 /usr/share/alsa/soundcards.conf
 /usr/share/alsa/utils.sh
 /deps_not_found.sh
+/slapt-getrc.installationsalix
+/slapt-getrc.installationslackware
 /slapt-getrc.installationslint
 
 

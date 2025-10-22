@@ -27,31 +27,56 @@
 # initrd genuine Slackware initrd
 # <filename>.iso The ISO file written using this scripts intended to install Slint
 #
-[ "$(command -v slapt-get)" = "" ] && echo "Install slapt-get, then try again." && exit
-[ "$(command -v spkg)" = "" ] && echo "Install spkg, then try again." && exit
+press_enter_to_continue() {
+	if [ "$#" -eq 1 ] then 
+		echo "$1"
+	else
+		printf "Press Enter to continue..."
+	fi
+	read -r dummy
+}
+if [ ! -x /usr/sbin/slapt-get ]; then
+	echo "slapt-get is needed to build the ISO."
+	echo "You can run the SlackBuild available at https://slckbuilds.org"
+	echo "or get and install this package:"
+	echo "https://slackware.uk/slint/x86_64/slint-15.0/slint/slapt-get-0.11.11-x86_64-4slint.txz"
+	exit
+fi
+if [ ! -x /sbin/spkg ]; then
+	echo "spkg is needed to build the ISO."
+	echo "You can get intsall this package:"
+	echo "https://slackware.uk/slint/x86_64/slint-15.0/slint/spkg-1.6-x86_64-2slint.txz"
+	exit
+fi 
 # This directory should be owned by a regular user
 [ "$REGULARUSER" = root ] && echo "Do not run this script in a directory owned by root!" && exit
 . build/set_variables_slint
-echo "We need to put 6G of files in this directory. if that's OK press Enter else press ctrl-C."
-read -r
+press_enter_to_continue "We need to put 10G of files in this directory. if that's OK press Enter else press ctrl-C."
 # In the file build/set_variables_slint, update the kernel version KVER and ISOVERSION if need be
-echo "The kernel version is KVER=$KVER and the ISO VERSION ISOVERSION=$ISOVERSION as sourced from"
-echo "./set_variables_slint. If they are up to date press Enter, else press ctrl-C and update them."
-read -r
+echo "The ISO VERSION ISOVERSION=$ISOVERSION as sourced from ./set_variables_slint."
+press_enter_to_continue "If that's OK press Enter, else press ctrl-C and update them."
 echo "Get the latest versions of scripts used during installation..."
-sh build/get_scripts slint 1>>LOG_build_ISO 2>>LOG_build_ISO
+sh build/get_scripts slint
 echo
+# Clean the sets in ./sets although it shouls have been done by the maintainer
+sh build/clean_sets.sh
 echo "Creating and populating the directory holding the packages,"
 echo "from which the ISO will be written. This takes some time..."
-sudo sh build/iso_dir slint |tee LOG_build_ISO
+su -c "sh build/iso_dir slint"
 echo
-echo "Check $ISODIR, if OK press Enter"
-read -r
+# Check that all needed packages are put in the ISO  
+j=0
+for i in $SETS; do
+    k=$(wc -l < "sets/$i")
+    NBPKG=$((j + k))
+done
+NBPKINISO="$(find "$ISODIR"/slint isodir -name "*.txz"|wc -l)"
+[ ! "$NBPKG" -eq "$NBPKINISO" ] && \
+echo "There should be $NBPKG in $ISODIR but there are  ${NBPKINISO}." \
+&& exit
 echo "Unpack Slackware's initramfs, customize it and put it into place..."
-sudo sh build/initrd slint 1>>LOG_build_ISO 2>>LOG_build_ISO
-echo "Check initramfs, if OK press Enter."
-read -r
-echo
+su -c 'sh build/initrd slint'
+press_enter_to_continue "A file $ISODIR/initrd has been written. Press Enter to continue"
 echo "Adding the package's metadata. This takes a long time..."
 sh build/metadata slint 1>>LOG_build_ISO
 echo

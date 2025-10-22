@@ -6,14 +6,19 @@ For the impatients, to build a Slint ISO, do this:
 1. (Create if need be then) cd to a directory owned by a regular user, here
    named /data (but it can also be $HOME or one of its subdirs)
 2. type as regular user:
+   either:
+   wget https://github.com/DidierSpaier/build_ISO/archive/refs/heads/main.zip \
+   && unzip main.zip && mv build_ISO-main build_ISO
+   or:
    git clone https://github.com/DidierSpaier/build_ISO
+   Then:
    cd build_ISO
    sh build_Slint_ISO.sh
-   The ISO image should then be available in /data/build_ISO or such.
+   The ISO image should be available after that in /data/build_ISO or such.
    We will name this directory $SLINTROOT
 
 Before you begin, there are a few requirements:
-- At least 6G of space on disk should be available.
+- At least 10 G of space on disk should be available.
 - The host should be a 64bit Linux system.
 - The packages slapt-get and spkg should be installed.
   slapt-get is installed by default in Salix, Slackel and Slint.
