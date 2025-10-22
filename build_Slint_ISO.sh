@@ -65,14 +65,14 @@ echo "from which the ISO will be written. This takes some time..."
 su -c "sh build/iso_dir slint"
 echo
 # Check that all needed packages are put in the ISO  
-j=0
+NBPKG=0
 for i in $SETS; do
     k=$(wc -l < "sets/$i")
-    NBPKG=$((j + k))
+    NBPKG=$((NBPKG + k))
 done
-NBPKINISO="$(find "$ISODIR"/slint isodir -name "*.txz"|wc -l)"
-[ ! "$NBPKG" -eq "$NBPKINISO" ] && \
-echo "There should be $NBPKG in $ISODIR but there are  ${NBPKINISO}." \
+NBPKGISO="$(find "$ISODIR"/slint -name "*.txz"|wc -l)"
+[ ! "$NBPKG" -eq "$NBPKGISO" ] && \
+echo "There should be $NBPKG in $ISODIR but there are ${NBPKGISO}." \
 && exit
 echo "Unpack Slackware's initramfs, customize it and put it into place..."
 su -c 'sh build/initrd slint'
