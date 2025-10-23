@@ -60,7 +60,6 @@ rm -f "$DEST"/usr/bin/dbus-launch
 # Include some files available in "$ROOTDIR/misc/files_in_the_initrd.list"
 while read -r i; do
 	[ ! "$i" ] && continue
-	echo "$i included in the installer " >> LOG_build_ISO
 	mkdir -p "$DEST"/"$(dirname "$i")"
 	cp -r "$SCRIPTS"/"$(basename "$i")" "$DEST"/"$(dirname "$i")"
 	chmod 0755 "$DEST"/"$(dirname "$i")"/"$(basename "$i")"
