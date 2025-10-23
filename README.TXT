@@ -5,8 +5,8 @@ For the impatients, to build a Slint ISO, do this:
 
 1. (Create if need be then) cd to a directory owned by a regular user, here
    named /data (but it can also be $HOME or one of its subdirs)
-2. type as regular user:
-   either:
+2. type as regular user to download the files tree from this repository) :
+   either (preferred, less payload and faster):
    wget https://github.com/DidierSpaier/build_ISO/archive/refs/heads/main.zip \
    && unzip main.zip && mv build_ISO-main build_ISO
    or:
@@ -20,22 +20,17 @@ For the impatients, to build a Slint ISO, do this:
 Before you begin, there are a few requirements:
 - At least 10 G of space on disk should be available.
 - The host should be a 64bit Linux system.
-- The packages slapt-get and spkg should be installed.
-  slapt-get is installed by default in Salix, Slackel and Slint.
-  For Slackware et derivatives, a SlackBuild is available in
-  https://slackbuilds.org  and the upstream repository is
-  https://github.com/jaos/slapt-get/
-  spkg is installed by default in Salix and Slint. The upstream repository is
-  https://github.com/gapan/spkg
-- Are also needed the usual POSIX/Linux utilities, git and a good enough
+- The packages slapt-get and spkg should be installed. Else, the script
+  build_Slint_ISO.sh will tell you how to get and install them.
+- Are also needed the usual POSIX/Linux utilities and a good enough
   Internet link to clone and fetch packages from remote repositories.
-- The signature CHECKSUMS.md5.gz.asc at the root of the ISO should be created
-  by providing a passphrase when asked and the associated GPG_KEY stored
-  somewhere to allow verification, like in the directory storing the ISO.
+- To provide the metadata including the signature CHECKSUMS.md5.gz.asc at
+  the root of the ISO you will need to type your passphrase associated
+  with your GPG key.
 - sudo should be configured.
 
 We describe below the process of building an ISO to install Slint, performed
-running the shell script build_Slint_ISO.sh whose we list the steps.
+running the shell script build_Slint_ISO.sh whose we list the steps below.
 
 NOTE: initially the process also allowed to build an ISO able to install
 Salix or Slackware. This attracted few interest so for now the script
