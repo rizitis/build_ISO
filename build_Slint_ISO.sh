@@ -37,14 +37,14 @@ press_enter_to_continue() {
 }
 if [ ! -x /usr/sbin/slapt-get ]; then
 	echo "slapt-get is needed to build the ISO."
-	echo "You can run the SlackBuild available at https://slckbuilds.org"
+	echo "You can run the SlackBuild available at https://slackbuilds.org"
 	echo "or get and install this package:"
 	echo "https://slackware.uk/slint/x86_64/slint-15.0/slint/slapt-get-0.11.11-x86_64-4slint.txz"
 	exit
 fi
 if [ ! -x /sbin/spkg ]; then
 	echo "spkg is needed to build the ISO."
-	echo "You can get install this package:"
+	echo "You can get and install this package:"
 	echo "https://slackware.uk/slint/x86_64/slint-15.0/slint/spkg-1.6-x86_64-2slint.txz"
 	exit
 fi 
