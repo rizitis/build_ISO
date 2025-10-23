@@ -53,8 +53,8 @@ fi
 . build/set_variables_slint
 press_enter_to_continue "We need to put 10G of files in this directory. If that's OK press Enter else press ctrl-C."
 # In the file build/set_variables_slint, update the kernel version KVER and ISOVERSION if need be
-echo "The ISO bersion is ISOVERSION=$ISOVERSION."
-press_enter_to_continue "If that's OK press Enter, else press ctrl-C and update it in ./set_variables_slint."
+echo "The ISO version is ISOVERSION=$ISOVERSION, set in ./build/set_variables_slint."
+press_enter_to_continue "If that's OK press Enter, else press ctrl-C and update ./build/set_variables_slint."
 echo "Get the latest versions of scripts used during installation..."
 sh build/get_scripts slint
 echo
