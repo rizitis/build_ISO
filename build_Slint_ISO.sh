@@ -34,27 +34,33 @@ press_enter_to_continue() {
 		printf "Press Enter to continue..."
 	fi
 	read -r dummy
+	echo "$dummy" > /dev/null
 }
 if [ ! -x /usr/sbin/slapt-get ]; then
 	echo "slapt-get is needed to build the ISO."
 	echo "You can run the SlackBuild available at https://slackbuilds.org"
-	echo "or get and install this package:"
+	echo "or at time of writing get and install this package:"
 	echo "https://slackware.uk/slint/x86_64/slint-15.0/slint/slapt-get-0.11.11-x86_64-4slint.txz"
 	exit
 fi
 if [ ! -x /sbin/spkg ]; then
 	echo "spkg is needed to build the ISO."
-	echo "You can get and install this package:"
+	echo "At time of writing you can get and install this package:"
 	echo "https://slackware.uk/slint/x86_64/slint-15.0/slint/spkg-1.6-x86_64-2slint.txz"
 	exit
-fi 
+fi
+if [ ! -x /bin/grub-mkrescue-sed.sh ]; then
+	echo "You need the script grub-mkrescue-sed.sh to build the ISO."
+	echo "At time of writing you can get it installing (or upgrading to) this package:"
+	echo "https://slackware.uk/slint/x86_64/slint-15.0/slint/xorriso-1.5.6.pl02-x86_64-2slint.txz"
+fi	
 # This directory should be owned by a regular user
 [ "$REGULARUSER" = root ] && echo "Do not run this script in a directory owned by root!" && exit
 . build/set_variables_slint
 press_enter_to_continue "We need to put 10G of files in this directory. If that's OK press Enter else press ctrl-C."
 # In the file build/set_variables_slint, update the kernel version KVER and ISOVERSION if need be
-echo "The ISO version is ISOVERSION=$ISOVERSION, set in ./build/set_variables_slint."
-press_enter_to_continue "If that's OK press Enter, else press ctrl-C and update ./build/set_variables_slint."
+echo "The ISO bersion is ISOVERSION=$ISOVERSION."
+press_enter_to_continue "If that's OK press Enter, else press ctrl-C and update it in ./set_variables_slint."
 echo "Get the latest versions of scripts used during installation..."
 sh build/get_scripts slint
 echo
@@ -80,6 +86,9 @@ press_enter_to_continue "A file $ISODIR/initrd has been written. Press Enter to 
 echo "Adding the package's metadata. This takes a long time..."
 sh build/metadata slint 1>>LOG_build_ISO
 echo
+echo "You may now gpg sign the file $ISODIR/CHECKSUMS.md5.gz"
+echo "You may also store your public gpg key as $ISODIR/GPG-KEY"
+press_enter_to_continue "When done, press Enter to write the ISO."
 echo "writing the ISO..."
 sh build/write_iso slint 1>>LOG_build_ISO 2>>LOG_build_ISO
 echo "All done. You may now check then remove the file ./LOG_build_ISO"

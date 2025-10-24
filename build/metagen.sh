@@ -157,7 +157,7 @@ case "$1" in
 		rm -f CHECKSUMS.md5.gz.asc
 		ls -1 slint|grep txz$ > slint.txt
 	[ -d slint/extra ] && ls -1 slint/extra|grep txz$ > extra.txt
-		gpg -sba CHECKSUMS.md5.gz
+#		gpg -sba CHECKSUMS.md5.gz
 	;;
 	clean)
 		find ./slint -type f -name "*.meta" -exec rm '{}' \;

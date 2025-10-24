@@ -16,5 +16,5 @@ sh "$ROOTDIR"/build/metagen.sh all
 sh "$ROOTDIR"/build/metagen.sh clean
 sh "$ROOTDIR"/build/metagen.sh md5
 )
-wget -q -P "$ISODIR" "http://$SLINTREMOTE/GPG-KEY"
+#wget -q -P "$ISODIR" "https://$SLINTREMOTE/GPG-KEY"
 echo Metadata have been written.
