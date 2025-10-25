@@ -92,7 +92,7 @@ echo "You may also store your public gpg key as $ISODIR/GPG-KEY"
 echo "For gpg version 2 (else replace gpg by gpg2 in the commands below),"
 echo "you can do that typing:"
 echo "gpg -sba $ISODIR/CHECKSUMS.md5.gz"
-echo "gpg --armor --export <your pubic key> > $ISODIR/GPG-KEY"
+echo "gpg --armor --export <your public key> > $ISODIR/GPG-KEY"
 press_enter_to_continue "When done, press Enter to write the ISO."
 echo "writing the ISO..."
 sh build/write_iso slint 1>>LOG_build_ISO 2>>LOG_build_ISO
