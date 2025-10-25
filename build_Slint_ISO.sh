@@ -49,10 +49,11 @@ if [ ! -x /sbin/spkg ]; then
 	echo "https://slackware.uk/slint/x86_64/slint-15.0/slint/spkg-1.6-x86_64-2slint.txz"
 	exit
 fi
-if [ ! -x /bin/grub-mkrescue-sed.sh ]; then
+if [ ! -x /usr/bin/grub-mkrescue-sed.sh ]; then
 	echo "You need the script grub-mkrescue-sed.sh to build the ISO."
 	echo "At time of writing you can get it installing (or upgrading to) this package:"
 	echo "https://slackware.uk/slint/x86_64/slint-15.0/slint/xorriso-1.5.6.pl02-x86_64-2slint.txz"
+	exit
 fi	
 # This directory should be owned by a regular user
 [ "$REGULARUSER" = root ] && echo "Do not run this script in a directory owned by root!" && exit
