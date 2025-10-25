@@ -22,11 +22,14 @@ Before you begin, there are a few requirements:
 - The host should be a 64bit Linux system.
 - The packages slapt-get and spkg should be installed. Else, the script
   build_Slint_ISO.sh will tell you how to get and install them.
+- A xorriso package including the script /usr/bin/grub-mkrescue-sed.sh
+  should be installed. Else the script build_Slint_ISO.sh will tell you
+  how to get and install one, possibly replacing the one installed.
 - Are also needed the usual POSIX/Linux utilities and a good enough
   Internet link to clone and fetch packages from remote repositories.
-- To provide the metadata including the signature CHECKSUMS.md5.gz.asc at
-  the root of the ISO you will need to type your passphrase associated
-  with your GPG key.
+- To sign the file CHECKSUMS.md5.gz at the root of the ISO you should
+  have setup gpg, preferably version 2. Then you may put your public key
+  named GPG-KEY at the root of the ISO.
 - sudo should be configured.
 
 We describe below the process of building an ISO to install Slint, performed
@@ -42,19 +45,20 @@ All scripts mentioned below are sourced or run by build_Slint_ISO.sh.
   building process, like the ones mentioned here. Edit this file as need be.
 - buikd/get_scripts gets the latest versions of scripts that will run during
   installation of the system thus should be included in the ISO.
-- buikd/iso_dir fetches from remote repositories then moves in $ISODIR/slint
+- build/iso_dir fetches from remote repositories then moves in $ISODIR/slint
   that it creates the packages to be included in the then copies in
   $ISODIR/boot/grub the file grub.cfg. It also writes a few files in $ISODIR,
   including a linux kernel.
-- metadata writes in $ISODIR/slint the metadata associated to the packages and
-  the global metadata in $ISODIR, then asks the user to type the passphrase
-  associated to their GPG key to sign the file CHECKSUMS.md5.gz.
-- initrd unpacks the file initrd.img fetched from
+- build/initrd unpacks the file initrd.img fetched from
   https://slackware.uk/slackware/slackware64-15.0/EFI/BOOT in ./initrd-tree,
   then adds to it files and packages needed to make the installer accessible
   with braille and speech and polyglot and manage installation, then writes
   $ISODIR/initrd.
-- write_iso writes the ISO image in $ROOTDIR
+- build/metadata writes in $ISODIR/slint the metadata associated to the
+  packages and the global metadata in $ISODIR.
+- Optionally the user signs with gpg file CHECKSUMS.md5.gz and puts its
+  public key at the root of the files tree $ISODIR
+- write_iso writes the ISO image in $ROOTDIR.
 
 Note: bear in mind while reading the following that for now we put on hold the
 ability to build an ISO allowing to install Salix or Slackware,
